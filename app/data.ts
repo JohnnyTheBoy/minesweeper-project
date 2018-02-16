@@ -44,11 +44,12 @@ class Player {
     public static getInstance(): Player {
         return Player._instance;
     }
-    getUsername(): string {
+    getName(): string {
         return this._name;
     }
-    setUsername(value: string) {
+    setName(value: string) {
         this._name = value;
+        console.log(`Players name set to: ${this._name}`)
     }
 
     getGameMode(): string {

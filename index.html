@@ -15,20 +15,26 @@
 
     <main>
         <section id="gameOptions">
-
-            <label for="gameMode">Choose game mode:</label>
-            <select name="gameMode" id="gameMode">
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="expert">Expert</option>
-                <option value="custom">Custom</option>
-            </select>
-            <div id="customOpts" class="hidden">
+            <p>
+                <label for="username">Player name:</label>
+                <input type="text" name="username" id="username" placeholder="enter here...">
+            </p>
+            <p>
+                <label for="gameMode">Choose game mode:</label>
+                <select name="gameMode" id="gameMode">
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="expert">Expert</option>
+                    <option value="custom">Custom</option>
+                </select>
+            </p>
+            <p id="customModeOptions" class="hidden">
                 <input type="number" placeholder="Number of rows" id="customRows">
                 <input type="number" placeholder="Number of columns" id="customCols">
                 <input type="number" placeholder="Number of mines" id="customMines">
-            </div>
+            </p>
             <button id="start">Start</button>
+            <button id="reset" disabled>New Game</button>
         </section>
         <section id="game"></section>
         <section id="gameInfo"></section>

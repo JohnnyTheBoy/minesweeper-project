@@ -5,7 +5,7 @@ const customRowsInput = <HTMLInputElement>document.getElementById('customRows');
 const customColsInput = <HTMLInputElement>document.getElementById('customCols');
 const customMinesInput = <HTMLInputElement>document.getElementById('customMines');
 const gameModeInput = <HTMLSelectElement>document.getElementById('gameMode');
-const customOptsDiv = <HTMLElement>document.getElementById('customOpts');
+const customModeOptions = <HTMLElement>document.getElementById('customModeOptions');
 //#endregion
 
 //#region - getCustomProps() - gets custom properties from user input
@@ -20,10 +20,10 @@ const getCustomProps = () => {
 //#endregion
 
 //#region - displayCustomModeOpts() - hides or shows div with custom game options in document
-let displayCustomModeOpts = (): void => {
+let displayCustomModeOptions = (): void => {
     if (gameModeInput.value === "custom") {
-        customOptsDiv!.classList.remove('hidden');
-    } else { customOptsDiv!.classList.add('hidden'); }
+        customModeOptions!.classList.remove('hidden');
+    } else { customModeOptions!.classList.add('hidden'); }
 };
 //#endregion
 
@@ -69,7 +69,7 @@ const gameMode = (mode: string): number[] | string => {
 
 //#region - event listenerns
 gameModeInput.value = "beginner";
-gameModeInput.addEventListener('change', displayCustomModeOpts);
+gameModeInput.addEventListener('change', displayCustomModeOptions);
 //#endregion
 
 export { gameMode, gameModeInput };
