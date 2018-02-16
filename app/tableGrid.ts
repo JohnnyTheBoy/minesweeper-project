@@ -90,4 +90,4 @@ const defineSurrounding = (table: Element, element: HTMLElement) => { // definis
 //====================================================================================================
 
 
-export { createGrid};
+export { createGrid,defineSurrounding};
