@@ -11,9 +11,33 @@
 
 <body>
 
+    <header></header>
 
+    <main>
+        <section id="gameOptions">
 
-<script src="./js/bundle.js"></script>
+            <label for="gameMode">Choose game mode:</label>
+            <select name="gameMode" id="gameMode">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="expert">Expert</option>
+                <option value="custom">Custom</option>
+            </select>
+            <div id="customOpts" class="hidden">
+                <input type="number" placeholder="Number of rows" id="customRows">
+                <input type="number" placeholder="Number of columns" id="customCols">
+                <input type="number" placeholder="Number of mines" id="customMines">
+            </div>
+            <button id="start">Start</button>
+        </section>
+        <section id="game"></section>
+        <section id="gameInfo"></section>
+    </main>
+
+    <footer></footer>
+
+    <script src="./js/bundle.js"></script>
+
 </body>
 
 </html>

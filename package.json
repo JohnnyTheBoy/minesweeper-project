@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/JohnnyTheBoy/minesweeper-project#readme",
   "devDependencies": {
+    "http-server": "^0.11.1",
     "ts-loader": "^3.5.0",
     "typescript": "^2.7.1",
     "webpack": "^3.11.0"

@@ -60,3 +60,5 @@ class Player {
     }
 }
 //#endregion
+
+export {Game, Player};
