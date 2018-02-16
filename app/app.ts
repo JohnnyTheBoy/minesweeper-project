@@ -1,20 +1,24 @@
 import { Game, Player } from './data';
 import { gameMode, gameModeInput } from './gameMode';
+import {createGrid} from './tableGrid';
 
 //#region - selectors
 const gameStartButton = <HTMLButtonElement>document.getElementById('start');
 const gameResetButton = <HTMLButtonElement>document.getElementById('reset');
 const playerNameInput = <HTMLInputElement>document.getElementById('username');
+
+const gameSection = <HTMLElement>document.getElementById('game');
 //#endregion
 
 playerNameInput.value = "";
 
 //#region - testing func
 const onClick = (event): void => {
-    console.log(event.target.id);
+
     if (event.target.id === "start") {
-        gameMode(gameModeInput.value);
         Player.getInstance().setName(playerNameInput.value);
+        createGrid(gameMode(gameModeInput.value) as number[]);
+        gameSection.appendChild(Game.getInstance().getGameTable());
         playerNameInput.setAttribute('disabled', 'true');
         gameModeInput.setAttribute('disabled', 'true');
         gameStartButton.setAttribute('disabled', 'true');
@@ -27,6 +31,7 @@ const onClick = (event): void => {
         gameModeInput.value = 'beginner';
         playerNameInput.removeAttribute('disabled');
         playerNameInput.value = "";
+        gameSection.innerHTML = "";
     }
 };
 //#endregion

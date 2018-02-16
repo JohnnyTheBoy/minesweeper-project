@@ -10,6 +10,8 @@ class Game {
         custom: [0, 0, 0]
     };
 
+    private _gameTable:HTMLTableElement;
+
     constructor() {
         if (Game._instance) { throw new Error("Error, wrong use of Game instance!") }
         Game._instance = this;
@@ -25,6 +27,16 @@ class Game {
 
     public setCustomMode(info: number[]) {
         this._mode.custom = info;
+        console.log(`Custom mode set to ${this._mode.custom}`);
+    }
+
+    public setGameTable (element) {
+        this._gameTable = element;
+        console.log(this._gameTable);
+    }
+
+    public getGameTable(){
+        return this._gameTable;
     }
 }
 //#endregion
