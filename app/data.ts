@@ -32,7 +32,7 @@ class Game {
 
     public setGameTable (element) {
         this._gameTable = element;
-        console.log(this._gameTable);
+        console.log(`Table created`);
     }
 
     public getGameTable(){

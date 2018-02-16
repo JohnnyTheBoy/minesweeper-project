@@ -10,7 +10,124 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font: 20px grinched,sans-serif;
+    font-family:grinched,sans-serif;
+}
+
+html {
+    overflow-y: scroll;
+  }
+
+a {
+    text-decoration: none;
+    opacity: 0.50;
+    color: black;
+}
+a:hover {
+    opacity: 1;
+    color: black;
+}
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+
+input, button, select, option {
+    font-size: 24px;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/*====================================================================================================*/
+/*Header Styles*/
+/*====================================================================================================*/
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    align-items: center;
+    height: 20%;
+    background-color: rgb(247, 187, 77);
+    
+    animation: 1s fadein 0.5s forwards;
+    /* opacity: 0; */
+}
+
+header h1 {
+    height: 15vh;
+    font-size: 80px;
+    padding: 20px 0px;
+    margin-left: 60px;
+}
+
+header nav {
+    display:flex;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+header nav li {
+    padding: 20px 10px;
+    list-style: none;
+    display: inline;
+    font-size: 24px;
+}
+
+
+/*====================================================================================================*/
+/*Main Styles*/
+/*====================================================================================================*/
+
+main {
+    order:2;
+    min-height: 77vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-right: 17px;
+}
+
+#gameOptions {
+
+
+    width: 400px;
+    font-size: 30px;
+    padding-left: 30px;
+    padding-top: 50px;
+    margin-top: 20px;
+}
+
+#game {
+
+    margin-top: 20px;
+    padding: 20px;
+    max-width: 823px;
+}
+
+#gameInfo {
+
+    width: 400px;
+    text-align: center;
+    font-size: 28px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+#gameInfo h1 {
+    font-size: 50px;
+}
+#gameInfo h2 {
+    font-size: 30px;
+    text-align: center;
+    color: rgba(63, 63, 184, 0.719);
 }
 
 /*====================================================================================================*/
@@ -29,8 +146,22 @@ td {
     border: 1px solid rgb(0, 0, 0);
     border-radius: 10px;
     background-color: rgb(130, 137, 151);
-
-
-    
-    
     }
+
+
+/*====================================================================================================*/
+/*Footer Styles*/
+/*====================================================================================================*/
+
+footer {
+    order:3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 8vh;
+    
+    padding: 20px 120px;
+    font: 16px;
+    color: black;
+    background-color: rgb(247, 187, 77);
+}

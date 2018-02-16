@@ -11,13 +11,32 @@
 
 <body>
 
-    <header></header>
+    <header>
+        <h1>
+            <a href="#" id="logo">Minesweeper</a>
+        </h1>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">About Game</a>
+                </li>
+                <li>
+                    <a href="#">About Author</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
 
     <main>
         <section id="gameOptions">
             <p>
                 <label for="username">Player name:</label>
-                <input type="text" name="username" id="username" placeholder="enter here...">
+                <input type="text" name="username" id="username" placeholder="enter here..." maxlength="15">
             </p>
             <p>
                 <label for="gameMode">Choose game mode:</label>
@@ -37,10 +56,24 @@
             <button id="reset" disabled>New Game</button>
         </section>
         <section id="game"></section>
-        <section id="gameInfo"></section>
+        <section id="gameInfo">
+            <h1>Ranking Table</h1>
+            <h2>Beginners Mode</h2>
+            <ol>
+                <li>Sam - 1:23</li>
+                <li>Suzane - 1:25</li>
+                <li>John - 1:30</li>
+                <li>Mark - 2:12</li>
+                <li>Kit - 5:15</li>
+            </ol>
+
+        </section>
     </main>
 
-    <footer></footer>
+    <footer>
+            <p> Copyright &copy;2018. All rights reserverd.</p>
+            <p>Social media links goes here...</p>
+    </footer>
 
     <script src="./js/bundle.js"></script>
 
