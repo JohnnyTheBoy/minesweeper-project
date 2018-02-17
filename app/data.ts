@@ -1,3 +1,15 @@
+//#region - selectors
+const gameStartButton = <HTMLButtonElement>document.getElementById('start');
+const gameResetButton = <HTMLButtonElement>document.getElementById('reset');
+const playerNameInput = <HTMLInputElement>document.getElementById('username');
+const gameOptionsSection = document.getElementById('gameOptions');
+const gameSection = <HTMLElement>document.getElementById('game');
+//#endregion
+
+playerNameInput.value = "";
+
+
+
 //#region - Game singleton class definition
 class Game {
 
@@ -74,4 +86,4 @@ class Player {
 }
 //#endregion
 
-export {Game, Player};
+export {Game, Player, gameStartButton, gameResetButton, playerNameInput, gameOptionsSection, gameSection};
