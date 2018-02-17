@@ -125,7 +125,7 @@ main {
     font-size: 50px;
 }
 #gameInfo h2 {
-    font-size: 30px;
+    font-size: 60px;
     text-align: center;
     color: rgba(63, 63, 184, 0.719);
 }
@@ -137,7 +137,9 @@ main {
 .hidden {
     visibility: hidden;
 }
-
+/*====================================================================================================*/
+/*Game styles*/
+/*====================================================================================================*/
 
 
 td {
@@ -146,7 +148,16 @@ td {
     border: 1px solid rgb(0, 0, 0);
     border-radius: 10px;
     background-color: rgb(130, 137, 151);
+    transition: all 0.5s linear;
+    /* transition-duration: 0.7s;
+    transition-timing-function: linear; */
     }
+
+td:hover {
+    background-color: rgb(168, 38, 38);
+    border-radius: 50%;
+    border-color:rgb(130, 137, 151);
+}
 
 
 /*====================================================================================================*/

@@ -5,6 +5,7 @@ import { setMines, clearMines, writeTips } from './minesAndTips';
 
 
 
+
 const table = Game.getInstance().getGameTable();
 const playerGameMode = Player.getInstance().getGameMode();
 const gameModeInfo = Game.getInstance().modeInfo(playerGameMode);
@@ -12,16 +13,18 @@ const mineIcon = "\uD83D\uDCA3"; // definisemo ikonicu za minu u nekom momentu
 
 //#region - printGrid() - creates full Grid and adds it to the document
 const printGrid = (): void => {
+    let gameModeInfo = gameMode(gameModeInput.value) as number[];
     //create table
-    createGrid(gameMode(gameModeInput.value) as number[]);
+    createGrid(gameModeInfo);
+    const table = Game.getInstance().getGameTable();
     //set mines
     setMines(table, gameModeInfo, mineIcon);
-    //set tips
+    // // //set tips
     writeTips(table);
-    //print table
+    // // //print table
     gameSection.appendChild(table);
-    //set listeners
-    table.addEventListener('click', ()=>{console.log(`clicked field`)});
+    // //set listeners
+
 };
 //#endregion
 

@@ -3,7 +3,7 @@ const gameStartButton = <HTMLButtonElement>document.getElementById('start');
 const gameResetButton = <HTMLButtonElement>document.getElementById('reset');
 const playerNameInput = <HTMLInputElement>document.getElementById('username');
 const gameOptionsSection = document.getElementById('gameOptions');
-const gameSection = <HTMLElement>document.getElementById('game');
+const gameSection = document.getElementById('game');
 //#endregion
 
 playerNameInput.value = "";
@@ -22,7 +22,7 @@ class Game {
         custom: [0, 0, 0]
     };
 
-    private _gameTable:HTMLTableElement;
+    private _gameTable: HTMLTableElement;
 
     constructor() {
         if (Game._instance) { throw new Error("Error, wrong use of Game instance!") }
@@ -42,12 +42,12 @@ class Game {
         console.log(`Custom mode set to ${this._mode.custom}`);
     }
 
-    public setGameTable (element) {
+    public setGameTable(element) {
         this._gameTable = element;
         console.log(`Table created`);
     }
 
-    public getGameTable(){
+    public getGameTable() {
         return this._gameTable;
     }
 }
@@ -86,4 +86,4 @@ class Player {
 }
 //#endregion
 
-export {Game, Player, gameStartButton, gameResetButton, playerNameInput, gameOptionsSection, gameSection};
+export { Game, Player, gameStartButton, gameResetButton, playerNameInput, gameOptionsSection, gameSection };
