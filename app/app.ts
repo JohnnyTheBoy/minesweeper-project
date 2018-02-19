@@ -1,4 +1,4 @@
-import { Game, Player, gameOptionsSection, gameStartButton, gameResetButton, gameSection,game, playerNameInput,welcomeScreen } from './data';
+import { Game, Player, gameOptionsSection, gameStartButton, gameResetButton, gameSection, game, playerNameInput, welcomeScreen } from './data';
 import { gameMode, gameModeInput } from './gameMode';
 import { createGrid } from './tableGrid';
 import { setMines, clearMines, showMines, writeTips } from './minesAndTips';
@@ -6,7 +6,7 @@ import { openEmptyElement, stopClick } from './emptyFlow';
 import { preventTableMenu } from './helperFuncs';
 import { startTimerHandler, stopTimerHandler, resetTimer, timerPlace, calcScore } from './timer';
 import { handleRanking } from './ranking';
-import { boom, gameOver, win,gameShow } from './animation';
+import { boom, gameOver, win, gameShow } from './animation';
 
 
 const mineIcon = "\uD83D\uDCA3"; // definisemo ikonicu za minu u nekom momentu
@@ -49,28 +49,18 @@ const checkMove = (element: HTMLElement) => {
             element.addEventListener("click", onFieldClick);
             checkMove(element);
         }
-        // document.getElementById(element.id).click();
         else {
             let bomb = document.createElement('img');
             bomb.setAttribute('src', './images/mine50.png');
             element.classList.add('empty');
             stopTimerHandler();
-
             table.removeEventListener("click", onFieldClick);
             table.removeEventListener("mousedown", flagIt);
-
-
             element.appendChild(bomb);
             showMines(table, mineIcon);
             boom();
-            // alert("BOOOOOOM.....You're dead!");
-
             table.classList.add('table');
             gameOver();
-
-
-
-
         }
     }
     else if (attribute === "") {
@@ -91,7 +81,6 @@ const flagIt = (event: any) => {
     let element = event.target;
     if (element.tagName === "TD") {
         if (event.which === 3) {
-            // let target = event.target;
             let flag = document.createElement('img');
             if (Player.getInstance().getGameMode() === 'beginner') {
                 flag.setAttribute('src', './images/flagB.png');
@@ -100,14 +89,11 @@ const flagIt = (event: any) => {
             } else { flag.setAttribute('src', './images/flagE.png'); }
             flag.classList.add('flag');
 
-
-            // let flag = "\u2691";
             if (element.innerHTML === "") {
                 element.appendChild(flag);
                 element.classList.add('empty');
                 checkResult();
             }
-
         }
 
     } else if (element.tagName === "IMG") {
@@ -195,8 +181,6 @@ const onClick = (event): void => {
             Player.getInstance().setName(playerNameInput.value);
             gameShow();
             printGrid();
-            console.log(Player.getInstance().getName());
-            console.log(Player.getInstance().getGameMode());
             handleRanking();
         }
     }

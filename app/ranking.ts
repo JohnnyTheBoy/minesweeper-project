@@ -81,9 +81,6 @@ let printData = () => {
 
 //#region - handleRanking() - one to rule them all
 const handleRanking = () => {
-    // scoreList.classList.remove('scoreDisplay');
-    // gameModeName.classList.remove('scoreDisplay');
-    console.log(rankingTable);
     saveData();
     printData();
 };

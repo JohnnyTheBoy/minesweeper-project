@@ -5,8 +5,6 @@ const tableButton = document.getElementById('table-button');
 const gameRulesButton = document.getElementById('game-rules-button');
 const gameRules = document.getElementById('game-rules');
 const aboutGame = document.getElementById('about-game');
-
-
 const body = document.getElementById("body");
 
 const boom = () => {
@@ -30,29 +28,34 @@ const win = () => {
     game.appendChild(image);
 };
 
-aboutGameButton.addEventListener('click', () => {
+//#region - header nav
+
+const aboutGameShow = () =>{
     welcomeScreen.classList.add('remove');
     game.classList.add('remove');
     gameRules.classList.add('remove');
     aboutGame.classList.remove('remove');
-});
-
-
-const gameShow = ()=>{
-welcomeScreen.classList.add('remove');
-game.classList.remove('remove');
-gameRules.classList.add('remove');
-aboutGame.classList.add('remove');
 };
 
-tableButton.addEventListener('click',gameShow);
-
-
-gameRulesButton.addEventListener('click', () => {
+const gameRulesShow = () => {
     welcomeScreen.classList.add('remove');
     game.classList.add('remove');
     gameRules.classList.remove('remove');
     aboutGame.classList.add('remove');
- });
+};
+
+const gameShow = () => {
+    welcomeScreen.classList.add('remove');
+    game.classList.remove('remove');
+    gameRules.classList.add('remove');
+    aboutGame.classList.add('remove');
+};
+
+aboutGameButton.addEventListener('click', aboutGameShow);
+gameRulesButton.addEventListener('click', gameRulesShow);
+tableButton.addEventListener('click', gameShow);
+
+//#endregion
+
 
 export { boom, gameOver, win, gameShow };
