@@ -23,7 +23,7 @@ const setMines = (table: HTMLElement, modeInfo: number[], mineIcon: any): void =
 //#region - clearMines() - clear mines from table
 const clearMines = (table: HTMLElement): void => {
     const allFields = table.getElementsByTagName("td");
-    allFields.forEach((field: HTMLTableDataCellElement) => {
+    Array.prototype.forEach.call(allFields,(field: HTMLTableDataCellElement) => {
         field.setAttribute('data-mine', '');
     });
 }

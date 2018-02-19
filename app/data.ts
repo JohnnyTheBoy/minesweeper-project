@@ -59,6 +59,7 @@ class Player {
     private static _instance: Player = new Player();
     private _name: string = "";
     private _gameMode: string = "none";
+    private _score: number;
 
     constructor() {
         if (Player._instance) { throw new Error("Error, wrong use of Player instance!") }
@@ -82,6 +83,14 @@ class Player {
 
     setGameMode(value: string) {
         this._gameMode = value;
+    }
+
+    setScore(value) {
+        this._score = value;
+    }
+
+    getScore() {
+        return this._score;
     }
 }
 //#endregion

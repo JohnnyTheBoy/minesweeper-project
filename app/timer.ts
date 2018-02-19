@@ -13,7 +13,7 @@ let timer = {
 };
 
 
-let getSeconds = (): number => {
+let calcScore = (): number => {
     return timer.time.seconds + (timer.time.minutes * 60) + (timer.time.hours * 360);
 };
 
@@ -25,7 +25,7 @@ let getStringTime = () => {
 };
 
 let startTimer = (step = 1): void => {
-    timer.interval = setInterval(timer.timeIncrement, step * 1);
+    timer.interval = setInterval(timer.timeIncrement, step * 1000);
 };
 
 let stopTimer = (): void => {
@@ -50,4 +50,4 @@ let stopTimerHandler = () => {
 };
 
 
-export { startTimerHandler, stopTimer, resetTimer, getStringTime, timerPlace, stopTimerHandler, getSeconds };
+export { startTimerHandler, stopTimer, resetTimer, getStringTime, timerPlace, stopTimerHandler, calcScore };

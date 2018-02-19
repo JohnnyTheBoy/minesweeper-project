@@ -22,4 +22,13 @@ const randomNumbersArray = (arrLength: number, maxNum: number, minNum: number = 
 
 //====================================================================================================
 
-export { randomNumbersArray };
+//#region - preventMenu() - nema desni klik meni na tabli
+const preventTableMenu = (event):void => {
+    let clickedPlace = event.target;
+    if (clickedPlace.tagName === "TD" || clickedPlace.tagName === "TABLE") {
+        event.preventDefault();
+    }
+}
+//#endregion
+
+export { randomNumbersArray, preventTableMenu };

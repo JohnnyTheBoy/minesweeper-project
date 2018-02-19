@@ -10,9 +10,9 @@ function stopClick(event: any) {
 //#endregion
 
 //=====================EMPTY FLOW=========================================
-//#region - main f
+//#region - openEmptyElement() - flow function
 
-let openEmptyElement = (element: HTMLElement) => {// pokrece empty flow proveru
+let openEmptyElement = (element: HTMLTableDataCellElement) => {// pokrece empty flow proveru
     let emptyFields = firstEmptyFieldCheck(element);//proverava se prvo prazno polje i evidentiraju ostala prazna polja u okruzenju
     // console.log(emptyFields);
     let stopSearch = false;
@@ -52,58 +52,49 @@ let openEmptyElement = (element: HTMLElement) => {// pokrece empty flow proveru
 }
 //#endregion
 
-//#region - emptyCell()  // open field( za dev potrebe shows ^ in textContext) // checked OK!
-const emptyCell = (element: HTMLElement) => {
+//#region - emptyCell()
+const emptyCell = (element: HTMLTableDataCellElement): void => {
     if (element !== null) {
-        // let context = element.getAttribute("data-mine");
-
         element.setAttribute("data-empty", "");//ALERT brise se info o tome da li je prazna celija, proveriti zasto
         element.classList.add("empty");//css clasa da se oboji prazno polje
-        // element.textContent = context;// ALERT ne potrebno u produkciji        // text = "^"; u dev svrhe
     }
 }
 //#endregion
 
-
-//#region - checkEmptyFields() - proverava prazna polja u okruzenju i vraca niz skroz praznih polja
+//#region - checkEmptyFields() - check empty fields if it is totally empty or its a tip
 const checkEmptyFields = (fields: any) => {
-    let emptyFields: HTMLTableCellElement[] = [];//array of blank empty fields
-    fields.forEach((field: any) => {
+    let checkedEmptyFields: HTMLTableDataCellElement[] = [];
+    fields.forEach(field => {
         if (field === null) { }
         else {
-            field.setAttribute("data-click", "1");//postavlja da je kliknuto
-            // field.addEventListener("click", stopClick);//ukdida event
-            // field.addEventListener("mousedown", stopClick);//ukida event
-            let isEmpty = field.getAttribute("data-empty");
-            let context = field.getAttribute("data-mine");
-            if (isEmpty === "1") {// ako je polje skroz prazno
-                emptyFields.push(field);
+            field.setAttribute("data-click", "1");//set field as clicked
+            field.addEventListener("click", stopClick);//ukdida event
+            field.addEventListener("mousedown", stopClick);//ukida event
+            const isEmpty = field.getAttribute("data-empty");
+            const context = field.getAttribute("data-mine");
+            if (isEmpty === "1") {// if field is totally empty
+                checkedEmptyFields.push(field);
                 field.classList.add("empty");
             }
-            else { field.textContent = context; }// ako je polje prazno ali ima broj
+            else { field.textContent = context; }// if its tip, show it
         }
     });
-    return emptyFields; // returning array of blank empty fields
+    return checkedEmptyFields; // returning array of totally empty fields
 }
 //#endregion
 
 //#region - firstEmptyFieldCheck() - First clicked empty element check, returns array of empty blank elements
-const firstEmptyFieldCheck = (element: HTMLElement) => {//ispituje prvo prazno polje
-    element.setAttribute("data-click", "1"); // postavlja da je kliknuto
-    // element.addEventListener("click", stopClick);//stopira event click
-    // element.addEventListener("mousedown", stopClick); // stopira event mousedown
-    emptyCell(element); // prazni element i boji ga
+const firstEmptyFieldCheck = (field: HTMLTableDataCellElement) => {//checking first empty clicked field
+    field.setAttribute("data-click", "1"); // set clicked
+    field.addEventListener("click", stopClick);//stopira event click
+    field.addEventListener("mousedown", stopClick); // stopira event mousedown
+    emptyCell(field); // remove empty attribute, color field
 
-    let surroundFields = defineSurrounding(Game.getInstance().getGameTable(), element);//kreira niz susednih polja
-    surroundFields.forEach(field => { // za svako polje
-        if (field !== null) {// koje je u okviru table
-            field.setAttribute("data-click", ""); //brise info o kliknutom polju
-        }
-    });
-    let emptyFields = checkEmptyFields(surroundFields);
+    const surroundFields = defineSurrounding(Game.getInstance().getGameTable(), field);//kreira niz susednih polja
+    const emptyFields = checkEmptyFields(surroundFields);
     return emptyFields;
 }
 //#endregion
 //==============================================================
 
-export { openEmptyElement };
+export { openEmptyElement, stopClick };

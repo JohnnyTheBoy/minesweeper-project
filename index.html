@@ -52,14 +52,21 @@
                 <input type="number" placeholder="Number of columns" id="customCols">
                 <input type="number" placeholder="Number of mines" id="customMines">
             </p>
-            <button id="start">Start</button>
-            <button id="reset" disabled="disabled">New Game</button>
+            <p id="buttons">
+                <button id="start">Start</button>
+                <button id="reset" disabled="disabled">New Game</button>
+            </p>
+
+            <p id="timer">
+                <p>Time:</p>
+                <p id="timerPlace">00 : 00 : 00</p>
+            </p>
         </section>
         <section id="game"></section>
         <section id="gameInfo">
             <h1>Ranking Table</h1>
             <h2>Beginners Mode</h2>
-            <ol>
+            <ol id="ranking">
                 <li>Sam - 1:23</li>
                 <li>Suzane - 1:25</li>
                 <li>John - 1:30</li>
