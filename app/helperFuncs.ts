@@ -25,7 +25,7 @@ const randomNumbersArray = (arrLength: number, maxNum: number, minNum: number = 
 //#region - preventMenu() - nema desni klik meni na tabli
 const preventTableMenu = (event):void => {
     let clickedPlace = event.target;
-    if (clickedPlace.tagName === "TD" || clickedPlace.tagName === "TABLE") {
+    if (clickedPlace.tagName === "TD" || clickedPlace.tagName === "TABLE" || clickedPlace.tagName === "IMG") {
         event.preventDefault();
     }
 }

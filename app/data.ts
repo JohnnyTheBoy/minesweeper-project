@@ -2,18 +2,18 @@
 const gameStartButton = <HTMLButtonElement>document.getElementById('start');
 const gameResetButton = <HTMLButtonElement>document.getElementById('reset');
 const playerNameInput = <HTMLInputElement>document.getElementById('username');
-const gameOptionsSection = document.getElementById('gameOptions');
-const gameSection = document.getElementById('game');
+const gameOptionsSection = document.getElementById('game-options');
+const gameSection = document.getElementById('game-place');
 //#endregion
 
 playerNameInput.value = "";
 
 
-
 //#region - Game singleton class definition
+
 class Game {
 
-    private static _instance: Game = new Game();
+    private static readonly _instance: Game = new Game();
 
     private _mode = {
         beginner: [9, 9, 10],
@@ -24,9 +24,8 @@ class Game {
 
     private _gameTable: HTMLTableElement;
 
-    constructor() {
-        if (Game._instance) { throw new Error("Error, wrong use of Game instance!") }
-        Game._instance = this;
+    private constructor() {
+        // Game._instance = this;
     }
 
     public static getInstance(): Game {
@@ -51,19 +50,20 @@ class Game {
         return this._gameTable;
     }
 }
+
 //#endregion
 
 //#region - Player - singleton class definition
 class Player {
 
-    private static _instance: Player = new Player();
+    private static readonly _instance: Player = new Player();
+
     private _name: string = "";
     private _gameMode: string = "none";
     private _score: number;
 
-    constructor() {
-        if (Player._instance) { throw new Error("Error, wrong use of Player instance!") }
-        Player._instance = this;
+    private constructor() {
+        // Player._instance = this;
     }
 
     public static getInstance(): Player {
@@ -73,6 +73,7 @@ class Player {
         return this._name;
     }
     setName(value: string) {
+        if (value === ''){value = 'unknown player'}
         this._name = value;
         console.log(`Players name set to: ${this._name}`)
     }

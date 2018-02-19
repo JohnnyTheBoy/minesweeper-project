@@ -1,17 +1,16 @@
 import { Game, Player, gameOptionsSection, gameStartButton, gameResetButton, gameSection, playerNameInput } from './data';
 import { gameMode, gameModeInput } from './gameMode';
 import { createGrid } from './tableGrid';
-import { setMines, clearMines, writeTips } from './minesAndTips';
+import { setMines, clearMines, showMines, writeTips } from './minesAndTips';
 import { openEmptyElement, stopClick } from './emptyFlow';
 import { preventTableMenu } from './helperFuncs';
-import {startTimerHandler,stopTimerHandler, resetTimer,timerPlace} from './timer';
+import { startTimerHandler, stopTimerHandler, resetTimer, timerPlace, calcScore } from './timer';
+import { handleRanking } from './ranking';
+import { boom, gameOver, win } from './animation';
 
 
 const mineIcon = "\uD83D\uDCA3"; // definisemo ikonicu za minu u nekom momentu
 let clickCounter = 0; // follows clicks
-
-
-
 
 //#region - manageInputs() - manage inputs on document based on event
 const manageInputs = (event): string => {
@@ -32,6 +31,7 @@ const manageInputs = (event): string => {
         playerNameInput.value = "";
         gameSection.innerHTML = "";
         clickCounter = 0;
+        stopTimerHandler();
         resetTimer();
         timerPlace.textContent = "00 : 00 : 00";
         return "reset";
@@ -51,11 +51,26 @@ const checkMove = (element: HTMLElement) => {
         }
         // document.getElementById(element.id).click();
         else {
+            let bomb = document.createElement('img');
+            bomb.setAttribute('src', './images/mine50.png');
+            element.classList.add('empty');
             stopTimerHandler();
-            element.textContent = attribute;
-            alert("BOOOOOOM.....You're dead!");
+
             table.removeEventListener("click", onFieldClick);
             table.removeEventListener("mousedown", flagIt);
+
+
+            element.appendChild(bomb);
+            showMines(table, mineIcon);
+            boom();
+            // alert("BOOOOOOM.....You're dead!");
+
+            table.classList.add('table');
+            gameOver();
+
+
+
+
         }
     }
     else if (attribute === "") {
@@ -64,6 +79,7 @@ const checkMove = (element: HTMLElement) => {
     }
     else {
         element.textContent = attribute;
+        element.classList.add('clicked');
         element.setAttribute("data-click", "1");
         checkResult();
     }
@@ -75,18 +91,33 @@ const flagIt = (event: any) => {
     let element = event.target;
     if (element.tagName === "TD") {
         if (event.which === 3) {
-            let target = event.target;
-            let flag = "\u2691";
-            if (target.textContent === "") {
-                target.textContent = flag;
+            // let target = event.target;
+            let flag = document.createElement('img');
+            if (Player.getInstance().getGameMode() === 'beginner') {
+                flag.setAttribute('src', './images/flagB.png');
+            } else if (Player.getInstance().getGameMode() === 'intermediate') {
+                flag.setAttribute('src', './images/flagI.png');
+            } else { flag.setAttribute('src', './images/flagE.png'); }
+            flag.classList.add('flag');
+
+
+            // let flag = "\u2691";
+            if (element.innerHTML === "") {
+                element.appendChild(flag);
+                element.classList.add('empty');
+                checkResult();
             }
-            else {
-                target.textContent = "";
-            }
-            checkResult();
+
+        }
+
+    } else if (element.tagName === "IMG") {
+        if (event.which === 3) {
+            element.parentNode.classList.remove('empty');
+            element.parentNode.innerHTML = "";
         }
     }
 }
+
 //#endregion
 
 //#region - plantMinesAgain()
@@ -112,8 +143,11 @@ function checkResult() {
     });
 
     if ((closed.length === ((gameModeInfo[0] * gameModeInfo[1]) - gameModeInfo[2]))) {
-        alert("Congrats, you WON!");
+        win();
+        table.classList.add('table');
         stopTimerHandler();
+        Player.getInstance().setScore(calcScore());
+        handleRanking();
         table.removeEventListener("click", onFieldClick);
         table.removeEventListener("mousedown", flagIt);
     }
@@ -127,7 +161,7 @@ const onFieldClick = (event: any) => {
         field.addEventListener("click", stopClick);
         field.addEventListener("mousedown", stopClick);
         clickCounter++;
-        if (clickCounter === 1) {startTimerHandler()};
+        if (clickCounter === 1) { startTimerHandler() };
         checkMove(field);
     }
 };
@@ -139,6 +173,7 @@ const printGrid = (): void => {
     //create table
     createGrid(gameModeInfo);
     const table = Game.getInstance().getGameTable();
+    table.classList.add(Player.getInstance().getGameMode());
     //set mines
     setMines(table, gameModeInfo, mineIcon);
     // // //set tips
@@ -159,6 +194,9 @@ const onClick = (event): void => {
         if (manageInputs(event) === 'start') {
             Player.getInstance().setName(playerNameInput.value);
             printGrid();
+            console.log(Player.getInstance().getName());
+            console.log(Player.getInstance().getGameMode());
+            handleRanking();
         }
     }
 };

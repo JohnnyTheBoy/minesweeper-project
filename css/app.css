@@ -1,21 +1,30 @@
 /*====================================================================================================*/
-/* General styles*/
+/*General styles*/
 /*====================================================================================================*/
+
 @font-face {
     font-family: grinched;
     src: url('../fonts/grinched.ttf');
 }
 
 * {
-    margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family:grinched,sans-serif;
+    margin: 0;
+    font-family: grinched;
+}
+html, body {margin: 0; height: 100%; overflow: hidden}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    max-height: 100vh;
 }
 
 html {
-    overflow-y: scroll;
-  }
+overflow-y: scroll;
+font: 16px grinched;
+}
 
 a {
     text-decoration: none;
@@ -25,181 +34,448 @@ a {
 a:hover {
     opacity: 1;
     color: black;
+    text-decoration: none;
 }
 a:visited {
     text-decoration: none;
     color: black;
 }
-
-
-input, button, select, option {
-    font-size: 24px;
-}
-
-
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
 /*====================================================================================================*/
-/*Header Styles*/
+/*Animation*/
 /*====================================================================================================*/
 
+@keyframes fadein {
+    100%{
+        opacity:1;
+    }
+}
+
+@keyframes moveIt {
+    0%, 100% {
+      transform: rotate(45deg);
+    }
+    50% {
+      transform: rotate(-45deg);
+    }
+  }
+
+@keyframes moveShade {
+    0% {
+      transform: translateX(-100px) scale(1.4);
+      filter: blur(20px);
+    }
+    50% {
+      filter: blur(3px);
+    }
+    100% {
+      transform: translateX(100px) scale(1.4);
+      filter: blur(20px);
+    }
+  }
+
+/*====================================================================================================*/
+/*Header styles*/
+/*====================================================================================================*/
 header {
     display: flex;
+    z-index:1;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content:space-between;
-    align-items: center;
-    height: 20%;
+    flex-shrink: 0;
+    justify-content: space-between;
+    align-items:center;
+    padding: 0 3rem;
+    min-height: 15vh;
+    max-height: 15vh;
+    position:static;
     background-color: rgb(247, 187, 77);
-    
-    animation: 1s fadein 0.5s forwards;
-    /* opacity: 0; */
+
+    opacity:0;
+    animation: 2s fadein 1s forwards;
+
 }
 
 header h1 {
-    height: 15vh;
-    font-size: 80px;
-    padding: 20px 0px;
-    margin-left: 60px;
+    flex-grow: 1;
+    font-size:5rem;
+
 }
 
+header #bomb {
+    flex-grow: 2;
+    align-self:flex-start;
+    text-align:center;
+}
+
+#bombPic {
+    position: relative;
+    transform-origin: 50% 0;
+    animation: moveIt 2.5s ease-in-out infinite;
+  }
+
+.shadow {
+    width: 30px;
+    height: 5px;
+    background: gray;
+    border-radius: 50%;
+    margin: 20px auto 0;
+    animation: moveShade 1.25s ease-in-out alternate infinite;
+  }
+
+ @media (max-width:534px){
+     header #bomb {order:0}
+     header h1 {order:1}
+     header nav {order:2}
+
+ }
+
+ @media (max-width: 377px){
+     header {
+         padding:0 1rem;
+     }
+     header h1 {
+         font-size:3rem;
+     }
+ }
+
 header nav {
-    display:flex;
-    margin-right: 50px;
-    margin-left: 50px;
+    padding-left: 1rem;
+    flex-grow: 1;
+    text-align: center;
 }
 
 header nav li {
-    padding: 20px 10px;
+
     list-style: none;
     display: inline;
-    font-size: 24px;
+    padding-left: 1.3rem;
+    font-size: 1.5rem;
 }
 
-
 /*====================================================================================================*/
-/*Main Styles*/
+/*Main styles*/
 /*====================================================================================================*/
 
 main {
-    order:2;
-    min-height: 77vh;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-right: 17px;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-shrink: 0;
+    justify-content: space-around;
+    min-height: 75vh;
+    max-height: 75vh;
+    background-color: rgb(247, 187, 77);
+
+    opacity:0;
+    animation: 2s fadein 1s forwards;
+
 }
 
-#gameOptions {
+
+/*====================================================================================================*/
+/*Game Options Styles*/
+/*====================================================================================================*/
+
+main #game-options {
     display:flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    text-align: center;
 
-    width: 400px;
+    font-size: 2rem;
 
-    padding-left: 30px;
-    padding-top: 50px;
-    margin-top: 20px;
+    max-height: 60vh;
+    min-height: 60vh;
+
+    min-width: 19vw;
+    max-width: 19vw;
 }
 
-#customModeOptions{
-    align-self:center;
-
-}
-#buttons {
-    align-self: center;
-
+main p  {
+    padding-bottom: 1.5rem;
 }
 
+input, button, select, option {
+    font-size: 1.5rem;
+    font-family: grinched;
+}
 
-#timer {
-    font-size: 80px;
-    padding-top:100px;
-    align-self: center;
+.hidden-options {
+    display: none;
+}
+
+#timer-string {
+text-align: center;
+}
+
+.btn {
+
+    border-radius: 0.5rem;
+    color: #050505;
+    font-size: 1.5rem;
+    background: #ffffff;
+    padding: 0.2rem 0rem;
+    border: 2px solid #000000;
+    text-decoration: none;
+    width: 7vw;
+  }
+  
+  .btn:hover {
+    background: #050505;
+    text-decoration: none;
+    color:white;
+  }
+  
+  .btn:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+.input {
+    width: 14vw;
+    border: 2px solid #b7b7b7;
+    border-radius: 7px;
+    color: rgb(0, 0, 0);
+    background: rgba(252,252,252,1);
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.2) inset;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.66);
+
+}
+
+.select {
+    border: 2px solid #b7b7b7;
+    border-radius: 7px;
+    width: 14vw;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.2) inset;
+}
+
+/*====================================================================================================*/
+/*Game Place Styles*/
+/*====================================================================================================*/
+
+
+main #game-place {
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
     
+   
+    min-width: 60vw;
+    max-width: 60vw;
+    min-height: 74.1vh;
+    max-height: 74.1vh;
 }
 
-#game {
+/*
+td za beginner za sadasnje ikonice 3.1 rem, text 2rem
+    za intermediate 1.9rem, prepraviti ikonice ,text 1.5rem
+    za expert 30x30 1.6 rem, prepraviti ikonice, text 1rem
+*/
 
-    margin-top: 20px;
-    padding: 20px;
-    max-width: 823px;
-}
-
-#gameInfo {
-
-    width: 400px;
+.beginner td {
+    line-height: 0;
     text-align: center;
-    font-size: 28px;
-    margin-top: 20px;
-    padding: 20px;
-}
-
-#gameInfo h1 {
-    font-size: 50px;
-}
-#gameInfo h2 {
-    font-size: 60px;
-    text-align: center;
-    color: rgba(63, 63, 184, 0.719);
-}
-
-/*====================================================================================================*/
-/*Rest*/
-/*====================================================================================================*/
-
-.hidden {
-    visibility: hidden;
-}
-/*====================================================================================================*/
-/*Game styles*/
-/*====================================================================================================*/
-
-
-td {
+    align-content: center;
+    align-items: center;
+    vertical-align: middle;
     color:white;
     text-align:center;
-    width: 50px;
-    height: 50px;
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    background-color: rgb(130, 137, 151);
+    width: 3.1rem;
+    height: 3.1rem;
+    border: 2px solid rgb(104, 104, 104);
+    border-radius: 0.5rem;
+    background-color: rgb(176, 174, 185);
     transition: all 0.5s linear;
-    /* transition-duration: 0.7s;
-    transition-timing-function: linear; */
+    font:2rem grinched;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+
     }
 
+    .intermediate td{
+        color:white;
+        text-align:center;
+        width: 1.9rem;
+        height: 1.9rem;
+        border: 2px solid rgb(104, 104, 104);
+        border-radius: 0.5rem;
+        background-color: rgb(130, 137, 151);
+        transition: all 0.5s linear;
+        font:1.5rem grinched;
+        box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    }
+    .expert td{
+        color:white;
+        text-align:center;
+        width: 1.4rem;
+        height: 1.4rem;
+        border: 2px solid rgb(104, 104, 104);
+        border-radius: 0.5rem;
+        background-color: rgb(130, 137, 151);
+        transition: all 0.5s linear;
+        font: 1rem grinched;
+        box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    }  
+
 td:hover {
-    background-color: rgb(168, 38, 38);
+    background-color: rgb(245, 243, 240);
     border-radius: 50%;
     border-color:rgb(130, 137, 151);
 }
 
+.clicked {
+    transition: none;
+}
+.clicked:hover {
+    background-color: rgb(130, 137, 151);
+    border-color:rgb(104, 104, 104);
+    border-radius: 0.5rem;
+}
+
 
 /*====================================================================================================*/
-/*Footer Styles*/
+/*Game Info Styles*/
+/*====================================================================================================*/
+
+main #game-info {
+
+    display:flex;
+    position:relative;
+    flex-direction: column;
+    align-items: center;
+
+
+    
+    min-width: 19vw;
+    max-width: 19vw;
+    min-height: 60vh;
+    max-height: 60vh;
+    
+    font-size: 2rem;
+}
+
+main #game-info ol {
+    list-style-position: inside;
+    font-size: 1.7rem;
+}
+
+#game-info h1 {
+    padding-top:1rem;
+    padding-bottom: 1rem;
+}
+#game-info h2 {
+    padding-bottom:1rem;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+#modeName {
+    color:rgb(130, 137, 151);
+}
+
+/*====================================================================================================*/
+/*MAIN SECTION*/
+/*====================================================================================================*/
+
+.beginner .empty, .intermediate .empty,.expert .empty  {
+    background-color:white;
+    border-color:rgb(119, 117, 115);
+    transition: none;
+}
+
+.empty:hover {
+    background-color:white;
+    border-color:rgb(119, 117, 115);
+    transition: none;
+    border-radius: 0.5rem;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+/*====================================================================================================*/
+/*Game styles*/
 /*====================================================================================================*/
 
 footer {
-    order:3;
+
+
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    height: 8vh;
-    
-    padding: 20px 120px;
-    font: 16px;
-    color: black;
+    flex-direction: row;
+
+    justify-content: space-around;
+    padding: 1rem 3rem;
+    align-items:center;
+
+    min-height: 6vh;
+    max-height: 6vh;
     background-color: rgb(247, 187, 77);
+    font-size: 1rem;
+
+    opacity:0;
+    animation: 2s fadein 1s forwards;
 }
 
-.empty {
-    background-color:white;
-    border-color:orange;
+
+/*
+removed:
+
+flex-shrink:0;
+
+*/
+
+
+.big-boom {
+    position: absolute;
+    top: -10rem;
+    left: 8rem;
+    width: 80%;
+    z-index: 12;
+    opacity:1;
+    /* animation: 1s fadein 1s forwards; */
+    animation: 2s boomFadeout 2s forwards;
+
+
+
+}
+
+@keyframes boomFadeout {
+    100% {opacity: 0; visibility: hidden;}
+}
+
+.game-over {
+    position: absolute;
+    z-index:100;
+    top: 12rem;
+    left: 22rem;
+    opacity:0;
+    animation: 1s fadein 8s forwards;
+}
+
+@keyframes gameOver {
+    100% {opacity: 0; visibility: hidden;}
+}
+
+.table{
+    opacity: 1;
+    animation: 3s boomFadeout 5s forwards;
+}
+table {
+    padding-top: 0.1rem;
+}
+
+flag {
+    margin:auto;
+    padding:auto;
+}
+
+.win {
+    position:absolute;
+    top: 10rem;
+    left: 25rem;
+    animation: 3s fadein 0.5s forwards;
+    opacity:0;
 }

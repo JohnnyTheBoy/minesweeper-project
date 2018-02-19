@@ -55,8 +55,10 @@ let openEmptyElement = (element: HTMLTableDataCellElement) => {// pokrece empty 
 //#region - emptyCell()
 const emptyCell = (element: HTMLTableDataCellElement): void => {
     if (element !== null) {
+        element.innerHTML = "";
         element.setAttribute("data-empty", "");//ALERT brise se info o tome da li je prazna celija, proveriti zasto
         element.classList.add("empty");//css clasa da se oboji prazno polje
+
     }
 }
 //#endregion
@@ -76,7 +78,7 @@ const checkEmptyFields = (fields: any) => {
                 checkedEmptyFields.push(field);
                 field.classList.add("empty");
             }
-            else { field.textContent = context; }// if its tip, show it
+            else { field.textContent = context;field.classList.add('clicked'); }// if its tip, show it
         }
     });
     return checkedEmptyFields; // returning array of totally empty fields

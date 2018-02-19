@@ -23,10 +23,29 @@ const setMines = (table: HTMLElement, modeInfo: number[], mineIcon: any): void =
 //#region - clearMines() - clear mines from table
 const clearMines = (table: HTMLElement): void => {
     const allFields = table.getElementsByTagName("td");
-    Array.prototype.forEach.call(allFields,(field: HTMLTableDataCellElement) => {
+    Array.prototype.forEach.call(allFields, (field: HTMLTableDataCellElement) => {
         field.setAttribute('data-mine', '');
     });
 }
+//#endregion
+
+//#region - showMines() - show mines on grid
+const showMines = (table, mineIcon) => {
+    const allFields = table.getElementsByTagName("td");
+    Array.prototype.forEach.call(allFields, (field: HTMLTableDataCellElement) => {
+        if (field.getAttribute('data-mine') === mineIcon) {
+            field.innerHTML = "";
+            let image = document.createElement('img');
+            if (Player.getInstance().getGameMode() === 'beginner') {
+                image.setAttribute('src', './images/mineB.png');
+            } else if (Player.getInstance().getGameMode() === 'intermediate') {
+                image.setAttribute('src', './images/mineI.png');
+            } else { image.setAttribute('src', './images/mineE.png'); }
+            field.classList.add('empty');
+            field.appendChild(image);
+        }
+    });
+};
 //#endregion
 
 //NAPOMENA data-mine - ako je bomba stavlja se ikona, ako nije stavlja se broj bombi u okruzenju
@@ -63,4 +82,4 @@ function countMines(field: HTMLTableCellElement): number { // prosledjujemo polj
 }
 //#endregion
 
-export { setMines, clearMines, writeTips };
+export { setMines, clearMines, showMines, writeTips };
