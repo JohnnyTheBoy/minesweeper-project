@@ -6,7 +6,7 @@ import { openEmptyElement, stopClick } from './emptyFlow';
 import { preventTableMenu } from './helperFuncs';
 import { startTimerHandler, stopTimerHandler, resetTimer, timerPlace, calcScore } from './timer';
 import { handleRanking } from './ranking';
-import { boom, gameOver, win } from './animation';
+import { boom, gameOver, win,gameShow } from './animation';
 
 
 const mineIcon = "\uD83D\uDCA3"; // definisemo ikonicu za minu u nekom momentu
@@ -28,6 +28,7 @@ const manageInputs = (event): string => {
         gameModeInput.removeAttribute('disabled');
         gameModeInput.value = 'beginner';
         playerNameInput.removeAttribute('disabled');
+        gameShow();
         game.innerHTML = "";
         clickCounter = 0;
         stopTimerHandler();
@@ -192,7 +193,7 @@ const onClick = (event): void => {
     if (event.target.tagName === "BUTTON") {
         if (manageInputs(event) === 'start') {
             Player.getInstance().setName(playerNameInput.value);
-            welcomeScreen.classList.add('remove');
+            gameShow();
             printGrid();
             console.log(Player.getInstance().getName());
             console.log(Player.getInstance().getGameMode());

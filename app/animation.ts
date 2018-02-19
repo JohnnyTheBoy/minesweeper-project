@@ -37,12 +37,16 @@ aboutGameButton.addEventListener('click', () => {
     aboutGame.classList.remove('remove');
 });
 
-tableButton.addEventListener('click', () => {
-    welcomeScreen.classList.add('remove');
-    game.classList.remove('remove');
-    gameRules.classList.add('remove');
-    aboutGame.classList.add('remove');
- });
+
+const gameShow = ()=>{
+welcomeScreen.classList.add('remove');
+game.classList.remove('remove');
+gameRules.classList.add('remove');
+aboutGame.classList.add('remove');
+};
+
+tableButton.addEventListener('click',gameShow);
+
 
 gameRulesButton.addEventListener('click', () => {
     welcomeScreen.classList.add('remove');
@@ -51,4 +55,4 @@ gameRulesButton.addEventListener('click', () => {
     aboutGame.classList.add('remove');
  });
 
-export { boom, gameOver, win };
+export { boom, gameOver, win, gameShow };

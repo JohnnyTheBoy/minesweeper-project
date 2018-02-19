@@ -39,6 +39,21 @@ a:hover {
     text-decoration: none;
 }
 
+input, button, select, option {
+    font-size: 1.5rem;
+    font-family: grinched;
+}
+
+.hidden-options {
+    display: none;
+}
+
+
+.hidden {
+    visibility: hidden;
+}
+
+
 /*====================================================================================================*/
 /*Animation*/
 /*====================================================================================================*/
@@ -72,6 +87,15 @@ a:hover {
     }
   }
 
+  @keyframes boomFadeout {
+    100% {opacity: 0; visibility: hidden;}
+}
+
+
+
+@keyframes gameOver {
+    100% {opacity: 0; visibility: hidden;}
+}
 /*====================================================================================================*/
 /*Header styles*/
 /*====================================================================================================*/
@@ -121,21 +145,6 @@ header #bomb {
     animation: moveShade 1.25s ease-in-out alternate infinite;
   }
 
- @media (max-width:534px){
-     header #bomb {order:0}
-     header h1 {order:1}
-     header nav {order:2}
-
- }
-
- @media (max-width: 377px){
-     header {
-         padding:0 1rem;
-     }
-     header h1 {
-         font-size:3rem;
-     }
- }
 
 header nav {
     padding-left: 1rem;
@@ -171,6 +180,9 @@ main {
 
 }
 
+main p  {
+    padding-bottom: 1.5rem;
+}
 
 /*====================================================================================================*/
 /*Game Options Styles*/
@@ -191,21 +203,11 @@ main #game-options {
     max-width: 19vw;
 }
 
-main p  {
-    padding-bottom: 1.5rem;
-}
-
-input, button, select, option {
-    font-size: 1.5rem;
-    font-family: grinched;
-}
-
-.hidden-options {
-    display: none;
-}
-
-#timer-string {
+#time-string {
 text-align: center;
+color: rgb(130, 137, 151);
+font-size: 2.5rem;
+
 }
 
 .btn {
@@ -253,7 +255,6 @@ text-align: center;
 /*Game Place Styles*/
 /*====================================================================================================*/
 
-
 main #game-place {
 
     display:flex;
@@ -287,30 +288,31 @@ main #game-place {
 
     }
 
-    .intermediate td{
-        color:white;
-        text-align:center;
-        width: 1.9rem;
-        height: 1.9rem;
-        border: 2px solid rgb(104, 104, 104);
-        border-radius: 0.5rem;
-        background-color: rgb(130, 137, 151);
-        transition: all 0.5s linear;
-        font:1.5rem grinched;
-        box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
-    }
-    .expert td{
-        color:white;
-        text-align:center;
-        width: 1.4rem;
-        height: 1.4rem;
-        border: 2px solid rgb(104, 104, 104);
-        border-radius: 0.5rem;
-        background-color: rgb(130, 137, 151);
-        transition: all 0.5s linear;
-        font: 1rem grinched;
-        box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
-    }  
+.intermediate td{
+    color:white;
+    text-align:center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border: 2px solid rgb(104, 104, 104);
+    border-radius: 0.5rem;
+    background-color: rgb(130, 137, 151);
+    transition: all 0.5s linear;
+    font:1.5rem grinched;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+
+.expert td{
+    color:white;
+    text-align:center;
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 2px solid rgb(104, 104, 104);
+    border-radius: 0.5rem;
+    background-color: rgb(130, 137, 151);
+    transition: all 0.5s linear;
+    font: 1rem grinched;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}  
 
 td:hover {
     background-color: rgb(245, 243, 240);
@@ -327,6 +329,18 @@ td:hover {
     border-radius: 0.5rem;
 }
 
+.beginner .empty, .intermediate .empty,.expert .empty  {
+    background-color:white;
+    border-color:rgb(119, 117, 115);
+    transition: none;
+}
+
+.empty:hover {
+    background-color:white;
+    border-color:rgb(119, 117, 115);
+    transition: none;
+    border-radius: 0.5rem;
+}
 
 /*====================================================================================================*/
 /*Game Info Styles*/
@@ -339,8 +353,6 @@ main #game-info {
     flex-direction: column;
     align-items: center;
 
-
-    
     min-width: 19vw;
     max-width: 19vw;
     min-height: 60vh;
@@ -368,31 +380,6 @@ main #game-info ol {
     color:rgb(130, 137, 151);
 }
 
-/*====================================================================================================*/
-/*MAIN SECTION*/
-/*====================================================================================================*/
-
-.beginner .empty, .intermediate .empty,.expert .empty  {
-    background-color:white;
-    border-color:rgb(119, 117, 115);
-    transition: none;
-}
-
-.empty:hover {
-    background-color:white;
-    border-color:rgb(119, 117, 115);
-    transition: none;
-    border-radius: 0.5rem;
-}
-
-.hidden {
-    visibility: hidden;
-}
-
-/*====================================================================================================*/
-/*Game styles*/
-/*====================================================================================================*/
-
 
 /*====================================================================================================*/
 /*Footer animation*/
@@ -415,7 +402,6 @@ footer {
 }
 /*====================================================================================================*/
 
-
 .big-boom {
     position: absolute;
     top: -10rem;
@@ -429,11 +415,6 @@ footer {
 
 
 }
-
-@keyframes boomFadeout {
-    100% {opacity: 0; visibility: hidden;}
-}
-
 .game-over {
     position: absolute;
     z-index:100;
@@ -443,9 +424,6 @@ footer {
     animation: 1s fadein 5s forwards;
 }
 
-@keyframes gameOver {
-    100% {opacity: 0; visibility: hidden;}
-}
 
 .table{
     opacity: 1;
@@ -474,7 +452,7 @@ flag {
 
 #welcome-screen h1 {
  font-size: 4rem;
- padding-bottom: 6rem;
+ padding-bottom: 4rem;
  
 }
 
@@ -483,12 +461,17 @@ flag {
     font-size: 2rem;
 }
 
+#welcome-screen #good-luck {
+    color:rgb(130, 137, 151);
+}
+
 .remove {
     display:none;
 }
 
-
-
+/*====================================================================================================*/
+/*About Game Styles*/
+/*====================================================================================================*/
 #about-game {
     font-size: 1.5rem;
 
@@ -504,7 +487,9 @@ flag {
     padding-bottom: 1rem;
     color: rgb(130, 137, 151);
 }
-
+/*====================================================================================================*/
+/*Game Rules Styles*/
+/*====================================================================================================*/
 #game-rules {
     font-size: 2rem;
 }
