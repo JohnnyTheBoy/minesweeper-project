@@ -4,6 +4,8 @@ const gameResetButton = <HTMLButtonElement>document.getElementById('reset');
 const playerNameInput = <HTMLInputElement>document.getElementById('username');
 const gameOptionsSection = document.getElementById('game-options');
 const gameSection = document.getElementById('game-place');
+const welcomeScreen = document.getElementById('welcome-screen');
+const game = document.getElementById('game');
 //#endregion
 
 playerNameInput.value = "";
@@ -25,7 +27,6 @@ class Game {
     private _gameTable: HTMLTableElement;
 
     private constructor() {
-        // Game._instance = this;
     }
 
     public static getInstance(): Game {
@@ -63,7 +64,6 @@ class Player {
     private _score: number;
 
     private constructor() {
-        // Player._instance = this;
     }
 
     public static getInstance(): Player {
@@ -88,6 +88,7 @@ class Player {
 
     setScore(value) {
         this._score = value;
+        console.log(`Score set to ${this._score}`);
     }
 
     getScore() {
@@ -96,4 +97,4 @@ class Player {
 }
 //#endregion
 
-export { Game, Player, gameStartButton, gameResetButton, playerNameInput, gameOptionsSection, gameSection };
+export { Game, Player, gameStartButton, gameResetButton, playerNameInput, gameOptionsSection, gameSection,welcomeScreen,game };

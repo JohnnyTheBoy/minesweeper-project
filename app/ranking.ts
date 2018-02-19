@@ -32,12 +32,13 @@ const saveData = () => {
     let gameMode = Player.getInstance().getGameMode();
     console.log(`Game mode inside saveData: ${gameMode}`);
 
-    let currentModeTable: (string | number)[][] = storageData[gameMode];
+    let currentModeTable = storageData[gameMode];
     console.log(`Current Table inside saveData: ${currentModeTable}`);
     currentModeTable = scoreValidation(currentModeTable);
     console.log(`Table inside saveData: ${currentModeTable}`);
-    currentModeTable.sort((a, b) => { return a[1][0] - b[1][0] });
-    for (currentModeTable.length; currentModeTable.length > 6;) {
+    currentModeTable.sort((a, b) => { return a[1] - b[1]});
+    console.log(`Table inside saveData: ${currentModeTable}`);
+    for (currentModeTable.length; currentModeTable.length > 5;) {
         currentModeTable.pop();
     }
     storageData[gameMode] = currentModeTable;
@@ -50,10 +51,13 @@ const saveData = () => {
 //#region - scoreValidation () - validates if score is not equal to 0
 const scoreValidation = (table: (string | number)[][]) => {
     let newTable = table;
-    if (Player.getInstance().getScore() !== 0 && Player.getInstance().getScore() !== undefined) {
-        const playerScore = [Player.getInstance().getName(), Player.getInstance().getScore()];
+    console.log(newTable);
+    const playerScore = [Player.getInstance().getName(), Player.getInstance().getScore()];
+    if (playerScore[1] !== 0 && playerScore[1] !== undefined) {
         newTable.push(playerScore);
+        console.log('new table inside if statement',playerScore,newTable);
     }
+    console.log('newTable',newTable);
     return newTable;
 };
 //#endregion
@@ -77,8 +81,8 @@ let printData = () => {
 
 //#region - handleRanking() - one to rule them all
 const handleRanking = () => {
-    scoreList.classList.remove('scoreDisplay');
-    gameModeName.classList.remove('scoreDisplay');
+    // scoreList.classList.remove('scoreDisplay');
+    // gameModeName.classList.remove('scoreDisplay');
     console.log(rankingTable);
     saveData();
     printData();

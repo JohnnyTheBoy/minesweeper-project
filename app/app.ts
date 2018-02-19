@@ -1,4 +1,4 @@
-import { Game, Player, gameOptionsSection, gameStartButton, gameResetButton, gameSection, playerNameInput } from './data';
+import { Game, Player, gameOptionsSection, gameStartButton, gameResetButton, gameSection,game, playerNameInput,welcomeScreen } from './data';
 import { gameMode, gameModeInput } from './gameMode';
 import { createGrid } from './tableGrid';
 import { setMines, clearMines, showMines, writeTips } from './minesAndTips';
@@ -28,8 +28,7 @@ const manageInputs = (event): string => {
         gameModeInput.removeAttribute('disabled');
         gameModeInput.value = 'beginner';
         playerNameInput.removeAttribute('disabled');
-        playerNameInput.value = "";
-        gameSection.innerHTML = "";
+        game.innerHTML = "";
         clickCounter = 0;
         stopTimerHandler();
         resetTimer();
@@ -143,13 +142,13 @@ function checkResult() {
     });
 
     if ((closed.length === ((gameModeInfo[0] * gameModeInfo[1]) - gameModeInfo[2]))) {
-        win();
-        table.classList.add('table');
         stopTimerHandler();
         Player.getInstance().setScore(calcScore());
-        handleRanking();
         table.removeEventListener("click", onFieldClick);
         table.removeEventListener("mousedown", flagIt);
+        handleRanking();
+        win();
+        table.classList.add('table');
     }
 }
 //#endregion
@@ -179,7 +178,7 @@ const printGrid = (): void => {
     // // //set tips
     writeTips(table);
     // // //print table
-    gameSection.appendChild(table);
+    game.appendChild(table);
     // //set listeners
     table.addEventListener("contextmenu", preventTableMenu);
     table.addEventListener("mousedown", flagIt);
@@ -193,6 +192,7 @@ const onClick = (event): void => {
     if (event.target.tagName === "BUTTON") {
         if (manageInputs(event) === 'start') {
             Player.getInstance().setName(playerNameInput.value);
+            welcomeScreen.classList.add('remove');
             printGrid();
             console.log(Player.getInstance().getName());
             console.log(Player.getInstance().getGameMode());

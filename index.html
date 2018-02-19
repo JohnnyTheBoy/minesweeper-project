@@ -18,21 +18,21 @@
         <section id="bomb">
 
             <!-- <a href="#"> -->
-                <img src="./images/bomb.png" id="bombPic">
+            <img src="./images/bomb.png" id="bombPic">
             <!-- </a> -->
             <div class="shadow"></div>
 
         </section>
         <nav>
             <ul>
-                <li>
-                    <a href="#">About Game</a>
+                <li id="about-game-button">
+                    <a href="#"> About Game</a>
                 </li>
-                <li>
+                <li id="game-rules-button">
                     <a href="#">Game rules</a>
                 </li>
-                <li>
-                    <a href="#">Score Table</a>
+                <li id="table-button">
+                    <a href="#">Table</a>
                 </li>
             </ul>
         </nav>
@@ -67,18 +67,59 @@
         </section>
 
         <section id="game-place">
+            <section id="welcome-screen">
+                <h1>Welcome to Minesweeper</h1>
+                <p>Minesweeper is a logic game for single player. Main part of the game is board with defined number of fields
+                    that contains hidden "mines". The goal of the game is to uncover all safe (blank) fields on board without
+                    detonating any of hidden "mines" in the quickest time possible. Fields contain clues about the number
+                    of neighboring mines in each field.</p>
+                <p>Good Luck!!!</p>
+            </section>
+
+            <section id="about-game" class='remove'>
+                <h1>About Minesweeper</h1>
+                <p>Minesweeper is a logic game for single player. Main part of the game is board with defined number of fields
+                    that contains hidden 'mines'. The goal of the game is to uncover all safe (blank) fields on board without
+                    detonating any of hidden 'mines' in the quickest time possible. Fields contain clues about the number
+                    of neighboring mines in each field.</p>
+                <h2>Game History</h2>
+                <p>The game originates from the 1960s. However, the game we know today was created by Robert Donner and Curt
+                    Johnson both Microsoft employees in 1989. First it was officially released as part of the Windows Entertainment
+                    Pack in 1990. Finally, in 1992. the game became part of Microsoft operating system Windows 3.1.</p>
+            </section>
+
+            <section id="game-rules" class="remove">
+                <h1>Game Rules</h1>
+                <ul>
+                    <li> Game starts when player clicks on first field, and that also starts the timer.</li>
+                    <li>First field is always "safe" meaning it can't be a mine.</li>
+                    <li>Player can flag a potential mine so he can navigate easier.</li>
+                    <li>Player loses game if opens field that contains mine.</li>
+                    <li>Player wins if opens all of the "safe" fields.</li>
+                    <li>Players are ranked based on time spent to finish the game.</li>
+                </ul>
+            </section>
+
+            <section id="game"></section>
         </section>
 
         <section id="game-info">
+            <section id="score-table">
+                <h1>Score Table</h1>
 
-            <h1>Score Table</h1>
+                <h2 id="modeName" class="scoreDisplay">
+                    - game mode -
+                </h2>
 
-            <h2 id="modeName" class="scoreDisplay">
+                <ol id="scoreList" class="scoreDisplay">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
+            </section>
 
-            </h2>
-
-            <ol id="scoreList" class="scoreDisplay">
-            </ol>
 
         </section>
 
@@ -89,8 +130,6 @@
     </footer>
 
     <script src="./js/bundle.js"></script>
-
-
 </body>
 
 </html>

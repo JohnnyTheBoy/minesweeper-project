@@ -12,18 +12,20 @@
     margin: 0;
     font-family: grinched;
 }
-html, body {margin: 0; height: 100%; overflow: hidden}
+
 body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
     max-height: 100vh;
+    overflow: hidden
 }
 
 html {
-overflow-y: scroll;
-font: 16px grinched;
+    overflow: hidden;
+    overflow-y: scroll;
+    font-size: 16px;
 }
 
 a {
@@ -36,10 +38,7 @@ a:hover {
     color: black;
     text-decoration: none;
 }
-a:visited {
-    text-decoration: none;
-    color: black;
-}
+
 /*====================================================================================================*/
 /*Animation*/
 /*====================================================================================================*/
@@ -162,6 +161,7 @@ main {
     align-items: flex-start;
     flex-shrink: 0;
     justify-content: space-around;
+    
     min-height: 75vh;
     max-height: 75vh;
     background-color: rgb(247, 187, 77);
@@ -257,23 +257,16 @@ text-align: center;
 main #game-place {
 
     display:flex;
+
     justify-content: center;
     align-items: center;
-    flex-grow: 0;
-    flex-shrink: 0;
-    
+    padding: 0.2rem;
    
     min-width: 60vw;
     max-width: 60vw;
     min-height: 74.1vh;
     max-height: 74.1vh;
 }
-
-/*
-td za beginner za sadasnje ikonice 3.1 rem, text 2rem
-    za intermediate 1.9rem, prepraviti ikonice ,text 1.5rem
-    za expert 30x30 1.6 rem, prepraviti ikonice, text 1rem
-*/
 
 .beginner td {
     line-height: 0;
@@ -400,15 +393,17 @@ main #game-info ol {
 /*Game styles*/
 /*====================================================================================================*/
 
+
+/*====================================================================================================*/
+/*Footer animation*/
+/*====================================================================================================*/
 footer {
-
-
     display: flex;
     flex-direction: row;
-
     justify-content: space-around;
-    padding: 1rem 3rem;
     align-items:center;
+    padding: 1rem 3rem;
+    z-index: -10;
 
     min-height: 6vh;
     max-height: 6vh;
@@ -418,14 +413,7 @@ footer {
     opacity:0;
     animation: 2s fadein 1s forwards;
 }
-
-
-/*
-removed:
-
-flex-shrink:0;
-
-*/
+/*====================================================================================================*/
 
 
 .big-boom {
@@ -452,7 +440,7 @@ flex-shrink:0;
     top: 12rem;
     left: 22rem;
     opacity:0;
-    animation: 1s fadein 8s forwards;
+    animation: 1s fadein 5s forwards;
 }
 
 @keyframes gameOver {
@@ -461,7 +449,7 @@ flex-shrink:0;
 
 .table{
     opacity: 1;
-    animation: 3s boomFadeout 5s forwards;
+    animation: 3s boomFadeout 3s forwards;
 }
 table {
     padding-top: 0.1rem;
@@ -478,4 +466,51 @@ flag {
     left: 25rem;
     animation: 3s fadein 0.5s forwards;
     opacity:0;
+}
+
+/*====================================================================================================*/
+/*Welcom screen style*/
+/*====================================================================================================*/
+
+#welcome-screen h1 {
+ font-size: 4rem;
+ padding-bottom: 6rem;
+ 
+}
+
+#welcome-screen p {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.remove {
+    display:none;
+}
+
+
+
+#about-game {
+    font-size: 1.5rem;
+
+}
+
+#about-game h1 {
+    font-size: 3rem;
+    padding-bottom: 2rem;
+    color:rgb(130, 137, 151);
+}
+
+#about-game h2 {
+    padding-bottom: 1rem;
+    color: rgb(130, 137, 151);
+}
+
+#game-rules {
+    font-size: 2rem;
+}
+
+#game-rules h1 {
+    font-size: 3rem;
+    padding-bottom: 3rem;
+    color: rgb(130, 137, 151);
 }
