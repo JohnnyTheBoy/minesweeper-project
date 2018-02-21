@@ -4,8 +4,7 @@ const gameResetButton = <HTMLButtonElement>document.getElementById('reset');
 const playerNameInput = <HTMLInputElement>document.getElementById('player-name');
 const gameOptionsSection = document.getElementById('options');
 const gameSection = document.getElementById('game-place');
-const welcomeScreen = document.getElementById('welcome-screen');
-const game = document.getElementById('game');
+
 //#endregion
 
 playerNameInput.value = "";
@@ -39,12 +38,12 @@ class Game {
 
     public setCustomMode(info: number[]) {
         this._mode.custom = info;
-        console.log(`Custom mode set to ${this._mode.custom}`);
+        // console.log(`Custom mode set to ${this._mode.custom}`);
     }
 
     public setGameTable(element) {
         this._gameTable = element;
-        console.log(`Table created`);
+        // console.log(`Table created`);
     }
 
     public getGameTable() {
@@ -75,7 +74,7 @@ class Player {
     setName(value: string) {
         if (value === '') { value = 'unknown player' }
         this._name = value;
-        console.log(`Players name set to: ${this._name}`)
+        // console.log(`Players name set to: ${this._name}`);
     }
 
     getGameMode(): string {
@@ -88,7 +87,7 @@ class Player {
 
     setScore(value) {
         this._score = value;
-        console.log(`Score set to ${this._score}`);
+        // console.log(`Score set to ${this._score}`);
     }
 
     getScore() {
@@ -97,4 +96,4 @@ class Player {
 }
 //#endregion
 
-export { Game, Player, gameStartButton, gameResetButton, playerNameInput, gameOptionsSection, gameSection, welcomeScreen, game };
+export { Game, Player, gameStartButton, gameResetButton, playerNameInput, gameOptionsSection, gameSection};

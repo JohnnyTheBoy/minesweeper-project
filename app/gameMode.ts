@@ -40,15 +40,15 @@ const gameModeInput = <HTMLSelectElement>document.getElementById('game-mode');
 const gameMode = (mode: string): number[] | string => {
     switch (mode) {
         case "beginner":
-            console.log("Game mode: Beginner 9x9 table with 10 mines");
+            // console.log("Game mode: Beginner 9x9 table with 10 mines");
             Player.getInstance().setGameMode(mode);
             return Game.getInstance().modeInfo(mode);
         case "intermediate":
-            console.log("Game mode: Intermediate 16x16 table with 40 mines");
+            // console.log("Game mode: Intermediate 16x16 table with 40 mines");
             Player.getInstance().setGameMode(mode);
             return Game.getInstance().modeInfo(mode);
         case "expert":
-            console.log("Game mode: Expert 16x30 table with 99 mines");
+            // console.log("Game mode: Expert 16x30 table with 99 mines");
             Player.getInstance().setGameMode(mode);
             return Game.getInstance().modeInfo(mode);
         // case "custom":
@@ -69,7 +69,7 @@ const gameMode = (mode: string): number[] | string => {
 
 //#region - event listenerns
 gameModeInput.value = "beginner";
-// gameModeInput.addEventListener('change', displayCustomModeOptions);
+// gameModeInput.addEventListener('change', displayCustomModeOptions);//
 //#endregion
 
 export { gameMode, gameModeInput };

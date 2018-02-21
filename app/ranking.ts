@@ -2,15 +2,16 @@ import { Player } from './data';
 import { calcScore } from './timer';
 
 //#region - selectors
+const rankingGameMode = document.getElementById('game-mode-name');
 const scoreList = document.getElementById('score-list');
-const gameModeName = document.getElementById('game-mode-name');
+
 //#endregion
 
 //#region - rankingTable definition
 let rankingTable: {} = {
-    beginner: [['John', 15], ['Marry', 21], ['Tim', 24],['Alex', 26]],
-    intermediate: [['Sam', 44], ['Mark', 46], ['Jim', 50]],
-    expert: [['Maria', 58], ['Kit', 66], ['Tony', 70]]
+    beginner: [['John', 25], ['Marry', 26], ['Tim', 29], ['Alex', 35], ['Olivia', 40]],
+    intermediate: [['Sam', 44], ['Emily', 46], ['Jim', 50], ['Charlotte', 53], ['Willy', 55]],
+    expert: [['Maria', 58], ['Kit', 66], ['Tony', 70], ['Zoey', 75], ["Natalie", 80]]
 };
 //#endregion
 
@@ -18,25 +19,20 @@ let rankingTable: {} = {
 const presetStorage = (): void => {
     if (localStorage.getItem('rankingTable') === null) {
         localStorage.setItem('rankingTable', JSON.stringify(rankingTable));
-        console.log(`database fetched from localstorage`, localStorage.getItem('rankingTable'));
+        // console.log(`database fetched from localstorage`, localStorage.getItem('rankingTable'));// for dev purpose
     }
 };
 //#endregion
 
 presetStorage();
 
-//#region - saveData() -
+//#region - saveData() - saves data
 const saveData = () => {
     let storageData = JSON.parse(localStorage.getItem('rankingTable'));
     let gameMode = Player.getInstance().getGameMode();
-    console.log(`Game mode inside saveData: ${gameMode}`);
-
     let currentModeTable = storageData[gameMode];
-    console.log(`Current Table inside saveData: ${currentModeTable}`);
     currentModeTable = scoreValidation(currentModeTable);
-    console.log(`Table inside saveData: ${currentModeTable}`);
-    currentModeTable.sort((a, b) => { return a[1] - b[1]});
-    console.log(`Table inside saveData: ${currentModeTable}`);
+    currentModeTable.sort((a, b) => { return a[1] - b[1] });
     for (currentModeTable.length; currentModeTable.length > 5;) {
         currentModeTable.pop();
     }
@@ -50,13 +46,10 @@ const saveData = () => {
 //#region - scoreValidation () - validates if score is not equal to 0
 const scoreValidation = (table: (string | number)[][]) => {
     let newTable = table;
-    console.log(newTable);
     const playerScore = [Player.getInstance().getName(), Player.getInstance().getScore()];
     if (playerScore[1] !== 0 && playerScore[1] !== undefined) {
         newTable.push(playerScore);
-        console.log('new table inside if statement',playerScore,newTable);
     }
-    console.log('newTable',newTable);
     return newTable;
 };
 //#endregion
@@ -64,12 +57,9 @@ const scoreValidation = (table: (string | number)[][]) => {
 
 //#region - writeData() - prints out ranking table
 let printData = () => {
-
     let table = rankingTable[Player.getInstance().getGameMode()];
-
-    gameModeName.textContent = Player.getInstance().getGameMode() + ' mode';
+    rankingGameMode.textContent = Player.getInstance().getGameMode() + ' mode';
     scoreList.innerHTML = '';
-
     table.forEach(element => {
         let li = document.createElement('li');
         li.textContent = `${element[0]} - ${element[1]}`;

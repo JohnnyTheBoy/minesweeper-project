@@ -1,12 +1,17 @@
-import { Game, gameSection, game, welcomeScreen } from './data';
+import { Game, gameSection } from './data';
 
+//#region - DOM selectors
 const aboutGameButton = document.getElementById('about-game-button');
 const gameButton = document.getElementById('game-button');
 const gameRulesButton = document.getElementById('game-rules-button');
 
+const welcomeScreen = document.getElementById('welcome-screen');
 const gameRules = document.getElementById('game-rules');
 const aboutGame = document.getElementById('about-game');
+const gameGridSection = document.getElementById('game');
 const body = document.getElementById("body");
+//#endregion
+
 
 const boom = () => {
     let image = document.createElement('img');
@@ -19,35 +24,35 @@ const gameOver = () => {
     let image = document.createElement('img');
     image.setAttribute('src', './images/gameover.png');
     image.classList.add('game-over');
-    game.appendChild(image);
+    gameGridSection.appendChild(image);
 };
 
 const win = () => {
     let image = document.createElement('img');
     image.setAttribute('src', './images/win.png');
     image.classList.add('win');
-    game.appendChild(image);
+    gameGridSection.appendChild(image);
 };
 
 //#region - header nav
 
-const aboutGameShow = () =>{
+const aboutGameShow = () => {
     welcomeScreen.classList.add('remove');
-    game.classList.add('remove');
+    gameGridSection.classList.add('remove');
     gameRules.classList.add('remove');
     aboutGame.classList.remove('remove');
 };
 
 const gameRulesShow = () => {
     welcomeScreen.classList.add('remove');
-    game.classList.add('remove');
+    gameGridSection.classList.add('remove');
     gameRules.classList.remove('remove');
     aboutGame.classList.add('remove');
 };
 
 const gameShow = () => {
     welcomeScreen.classList.add('remove');
-    game.classList.remove('remove');
+    gameGridSection.classList.remove('remove');
     gameRules.classList.add('remove');
     aboutGame.classList.add('remove');
 };
@@ -59,4 +64,4 @@ gameButton.addEventListener('click', gameShow);
 //#endregion
 
 
-export { boom, gameOver, win, gameShow };
+export { boom, gameOver, win, gameShow, gameGridSection };

@@ -36,7 +36,7 @@ let resetTimer = () => {
     for (let element in timer.time) { timer.time[element] = 0 };
 }
 
-let stringInterval = 0; // za ispis string vremena
+let stringInterval = 0; // saving interval num for string print
 const timerPlace = document.getElementById('timer-place');
 
 let startTimerHandler = () => {

@@ -175,10 +175,6 @@ main {
     
 }
 
-.input:disabled {
-    background:rgb(219, 218, 218);
-}
-
 .select {
     border: 0.2rem solid #b7b7b7;
     font-size: 1.5rem;
@@ -187,6 +183,10 @@ main {
     min-width: 14vw;
     box-shadow: 0 0 0.2rem 0 rgba(0,0,0,0.2) inset;
     cursor: pointer;
+}
+
+.input:disabled, .select:disabled {
+    background:rgb(219, 218, 218);
 }
 
 .btn {

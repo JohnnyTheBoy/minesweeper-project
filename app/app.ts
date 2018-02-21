@@ -1,18 +1,18 @@
-import { Game, Player, gameOptionsSection, gameStartButton, gameResetButton, gameSection, game, playerNameInput} from './data';
+import { Game, Player, gameOptionsSection, gameStartButton, gameResetButton, gameSection, playerNameInput } from './data';
 import { gameMode, gameModeInput } from './gameMode';
 import { createGrid } from './tableGrid';
-import { setMines, clearMines, showMines, writeTips } from './minesAndTips';
+import { setMines, clearMines, showMines, writeTips, setMineIcon } from './minesAndTips';
 import { openEmptyElement, stopClick } from './emptyFlow';
 import { preventTableMenu } from './helperFuncs';
 import { startTimerHandler, stopTimerHandler, resetTimer, timerPlace, calcScore } from './timer';
 import { handleRanking } from './ranking';
-import { boom, gameOver, win, gameShow } from './animation';
+import { boom, gameOver, win, gameShow, gameGridSection } from './animation';
 
 
 const mineIcon = "\uD83D\uDCA3"; // definisemo ikonicu za minu u nekom momentu
 let clickCounter = 0; // follows clicks
 
-//#region - manageInputs() - manage inputs on document based on event
+//#region - manageInputs() - manage inputs on document, based on event
 const manageInputs = (event): string => {
     if (event.target.id === "start") {
 
@@ -29,7 +29,7 @@ const manageInputs = (event): string => {
         gameModeInput.value = 'beginner';
         playerNameInput.removeAttribute('disabled');
         gameShow();
-        game.innerHTML = "";
+        gameGridSection.innerHTML = "";
         clickCounter = 0;
         stopTimerHandler();
         resetTimer();
@@ -39,7 +39,7 @@ const manageInputs = (event): string => {
 };
 //#endregion
 
-//#region - checkMove() - proverava potez i preduzima dalje korake
+//#region - checkMove() - check result of move that player made and decides what then
 const checkMove = (element: HTMLElement) => {
     const table = Game.getInstance().getGameTable();
     const attribute = element.getAttribute("data-mine");
@@ -50,8 +50,7 @@ const checkMove = (element: HTMLElement) => {
             checkMove(element);
         }
         else {
-            let bomb = document.createElement('img');
-            bomb.setAttribute('src', './images/mine50.png');
+            let bomb = setMineIcon();
             element.classList.add('empty');
             stopTimerHandler();
             table.removeEventListener("click", onFieldClick);
@@ -65,18 +64,18 @@ const checkMove = (element: HTMLElement) => {
     }
     else if (attribute === "") {
         openEmptyElement(<any>element);
-        checkResult();
+        checkWin();
     }
     else {
         element.textContent = attribute;
         element.classList.add('clicked');
         element.setAttribute("data-click", "1");
-        checkResult();
+        checkWin();
     }
 }
 //#endregion
 
-//#region - flagIt() - postavljanje zastave na desni klik
+//#region - flagIt() - puts flag on right click
 const flagIt = (event: any) => {
     let element = event.target;
     if (element.tagName === "TD") {
@@ -90,16 +89,18 @@ const flagIt = (event: any) => {
             flag.classList.add('flag');
 
             if (element.innerHTML === "") {
+                element.addEventListener("click", stopClick);
                 element.appendChild(flag);
                 element.classList.add('empty');
-                checkResult();
+                checkWin();
             }
         }
-
     } else if (element.tagName === "IMG") {
         if (event.which === 3) {
             element.parentNode.classList.remove('empty');
+            element.parentNode.addEventListener('click', onFieldClick);
             element.parentNode.innerHTML = "";
+
         }
     }
 }
@@ -116,8 +117,8 @@ let plantMinesAgain = () => {
 };
 //#endregion
 
-//#region - checkResult() - proverava rezultat
-function checkResult() {
+//#region - checkWin()
+function checkWin() {
     const table = Game.getInstance().getGameTable();
     let gameModeInfo = gameMode(gameModeInput.value) as number[];
     let closed: any = [];
@@ -140,7 +141,7 @@ function checkResult() {
 }
 //#endregion
 
-//#region onFieldClick() - definise raspored na klik
+//#region onFieldClick() - what to do when player clicks on field
 const onFieldClick = (event: any) => {
     let field = event.target;
     if (field.tagName === "TD") {
@@ -165,7 +166,7 @@ const printGrid = (): void => {
     // // //set tips
     writeTips(table);
     // // //print table
-    game.appendChild(table);
+    gameGridSection.appendChild(table);
     // //set listeners
     table.addEventListener("contextmenu", preventTableMenu);
     table.addEventListener("mousedown", flagIt);

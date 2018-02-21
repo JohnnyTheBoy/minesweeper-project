@@ -22,10 +22,10 @@ const randomNumbersArray = (arrLength: number, maxNum: number, minNum: number = 
 
 //====================================================================================================
 
-//#region - preventMenu() - nema desni klik meni na tabli
+//#region - preventTableMenu() - prevents default right click on table elements
 const preventTableMenu = (event):void => {
     let clickedPlace = event.target;
-    if (clickedPlace.tagName === "TD" || clickedPlace.tagName === "TABLE" || clickedPlace.tagName === "IMG") {
+    if (clickedPlace.tagName === "TD" || clickedPlace.tagName === "TR" || clickedPlace.tagName === "TABLE" || clickedPlace.tagName === "IMG") {
         event.preventDefault();
     }
 }

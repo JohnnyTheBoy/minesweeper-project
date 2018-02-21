@@ -2,33 +2,30 @@ import { Game, Player } from './data';
 import { defineSurrounding } from './tableGrid';
 
 
-
 //#region - stopClick() - stopira eventLIstener na elementu koji je kliknut
-function stopClick(event: any) {
+const stopClick = (event: any) => {
     event.stopPropagation();
-}
+};
 //#endregion
 
 //=====================EMPTY FLOW=========================================
 //#region - openEmptyElement() - flow function
 
-let openEmptyElement = (element: HTMLTableDataCellElement) => {// pokrece empty flow proveru
-    let emptyFields = firstEmptyFieldCheck(element);//proverava se prvo prazno polje i evidentiraju ostala prazna polja u okruzenju
-    // console.log(emptyFields);
+let openEmptyElement = (element: HTMLTableDataCellElement) => {
+    let emptyFields = firstEmptyFieldCheck(element);
     let stopSearch = false;
-
     while (stopSearch == false) {
         if (emptyFields.length != 0) {
             let newMainArray: any[] = [];
 
-            emptyFields.forEach(field => {// za svako prazno polje
-                emptyCell(field);// totalno ga praznimo
-                let subArray = defineSurrounding(Game.getInstance().getGameTable(), field);//proveravamo okruzenje tog polja
-                subArray.forEach((element) => {//za svako polje iz okruzenja tog polja
-                    if (element !== null) {//ako je element u okviru table
-                        element.setAttribute("data-click", "1");//postavljamo da je kliknuto
-                        element.addEventListener("click", stopClick);//brisemo event
-                        element.addEventListener("mousedown", stopClick);// brisemo event
+            emptyFields.forEach(field => {
+                emptyCell(field);
+                let subArray = defineSurrounding(Game.getInstance().getGameTable(), field);
+                subArray.forEach((element) => {
+                    if (element !== null) {
+                        element.setAttribute("data-click", "1");
+                        element.addEventListener("click", stopClick);
+                        element.addEventListener("mousedown", stopClick);
                         if (newMainArray.indexOf(element) !== -1) { }
                         else { newMainArray.push(element) }
                         let context = element.getAttribute("data-id");
@@ -38,7 +35,6 @@ let openEmptyElement = (element: HTMLTableDataCellElement) => {// pokrece empty 
                     }
                 });
                 newMainArray = checkEmptyFields(newMainArray);
-                // console.log(newMainArray);
                 emptyFields = newMainArray;
             });
             stopSearch = false;
@@ -50,15 +46,15 @@ let openEmptyElement = (element: HTMLTableDataCellElement) => {// pokrece empty 
 
     }
 }
+
 //#endregion
 
 //#region - emptyCell()
 const emptyCell = (element: HTMLTableDataCellElement): void => {
     if (element !== null) {
         element.innerHTML = "";
-        element.setAttribute("data-empty", "");//ALERT brise se info o tome da li je prazna celija, proveriti zasto
-        element.classList.add("empty");//css clasa da se oboji prazno polje
-
+        element.setAttribute("data-empty", "");
+        element.classList.add("empty");
     }
 }
 //#endregion
@@ -78,14 +74,14 @@ const checkEmptyFields = (fields: any) => {
                 checkedEmptyFields.push(field);
                 field.classList.add("empty");
             }
-            else { field.textContent = context;field.classList.add('clicked'); }// if its tip, show it
+            else { field.textContent = context; field.classList.add('clicked'); }// if its tip, show it
         }
     });
     return checkedEmptyFields; // returning array of totally empty fields
 }
 //#endregion
 
-//#region - firstEmptyFieldCheck() - First clicked empty element check, returns array of empty blank elements
+//#region - firstEmptyFieldCheck() - first clicked empty element check, returns array of empty blank elements
 const firstEmptyFieldCheck = (field: HTMLTableDataCellElement) => {//checking first empty clicked field
     field.setAttribute("data-click", "1"); // set clicked
     field.addEventListener("click", stopClick);//stopira event click

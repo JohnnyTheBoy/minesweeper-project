@@ -2,20 +2,20 @@ import { Game, Player } from './data';
 import { defineSurrounding } from './tableGrid';
 import { randomNumbersArray } from './helperFuncs';
 //==============================MINES=================================================================
-//#region createMines() - create mines based on gameMode
-const createMines = (modeInfo: number[]): number[] => {// kreira mine i sortira ih po velicini
+//#region createMines() - create mines based on game mode
+const createMines = (modeInfo: number[]): number[] => {// creates random number of mines and sorts them by size
     let mines = randomNumbersArray(modeInfo[2], (modeInfo[0] * modeInfo[1])).sort((a, b) => { return a - b });
-    console.log("Mines location: " + mines); // proveravamo poziciju mina // za dev potrebe
+    // console.log("Mines location: " + mines); // for dev purposes
     return mines;
 }
 //#endregion
 
-//#region - setMines() - set mines on table (bind to attribute data-mine)
+//#region - setMines() - set mines on table
 const setMines = (table: HTMLElement, modeInfo: number[], mineIcon: any): void => {
-    let mines: number[] = createMines(modeInfo);//kreiramo mine
-    const allFields = table.getElementsByTagName("td"); // uzimamo sve td elemente iz tabele
-    mines.forEach(mine => {  // postavljamo ikonu bomba na svaki td koji se poklapa sa nizom mina.
-        allFields[(mine - 1)].setAttribute("data-mine", mineIcon); // -1 zbog razlike u poziciji polja u nizu allfields i pozicije mine
+    let mines: number[] = createMines(modeInfo);
+    const allFields = table.getElementsByTagName("td");
+    mines.forEach(mine => { 
+        allFields[(mine - 1)].setAttribute("data-mine", mineIcon);
     });
 }
 //#endregion
@@ -29,57 +29,63 @@ const clearMines = (table: HTMLElement): void => {
 }
 //#endregion
 
+//#region - setMineIcon() - sets mine icon based on game mode
+const setMineIcon = () => {
+    let image = document.createElement('img');
+    if (Player.getInstance().getGameMode() === 'beginner') {
+        image.setAttribute('src', './images/mineB.png');
+    } else if (Player.getInstance().getGameMode() === 'intermediate') {
+        image.setAttribute('src', './images/mineI.png');
+    } else {
+        image.setAttribute('src', './images/mineE.png');
+    }
+    return image;
+}
+//#endregion
+
 //#region - showMines() - show mines on grid
 const showMines = (table, mineIcon) => {
     const allFields = table.getElementsByTagName("td");
     Array.prototype.forEach.call(allFields, (field: HTMLTableDataCellElement) => {
         if (field.getAttribute('data-mine') === mineIcon) {
             field.innerHTML = "";
-            let image = document.createElement('img');
-            if (Player.getInstance().getGameMode() === 'beginner') {
-                image.setAttribute('src', './images/mineB.png');
-            } else if (Player.getInstance().getGameMode() === 'intermediate') {
-                image.setAttribute('src', './images/mineI.png');
-            } else { image.setAttribute('src', './images/mineE.png'); }
             field.classList.add('empty');
-            field.appendChild(image);
+            field.appendChild(setMineIcon());
         }
     });
 };
 //#endregion
 
-//NAPOMENA data-mine - ako je bomba stavlja se ikona, ako nije stavlja se broj bombi u okruzenju
-
 //==============================TIPS==================================================================
 
-//#region - write tips based on mines on the given table
+//#region - writeTips() - write tips based on mines on the given table
 const writeTips = (table: HTMLTableElement): void => {
-    const allFields = table.getElementsByTagName("td"); // selektujemo sva polja u datoj tabeli
-    Array.prototype.forEach.call(allFields, field => { // za svako polje
-        if (field.getAttribute("data-mine") === "") { // ako je element prazan (tj. nije mina, jer su mine vec postavljene na tabli)
-            let minesNum = countMines(field); // proveravamo susedna polja i ispisujemo broj mina u okolini
-            if (minesNum === 0) { field.setAttribute("data-mine", ""); field.setAttribute("data-empty", "1"); }// ako nije mina i nema u okruzenju upisujemo u data-empty 1;1 za true;
-            else { field.setAttribute("data-mine", minesNum.toString()); field.setAttribute("data-empty", "0"); /*element.textContent = text; za dev potrebe*/ } //ako ima mina;data-empty ; 0 za false;
+    const allFields = table.getElementsByTagName("td");
+    Array.prototype.forEach.call(allFields, field => {
+        if (field.getAttribute("data-mine") === "") {
+            let minesNum = countMines(field);
+            if (minesNum === 0) { field.setAttribute("data-mine", ""); field.setAttribute("data-empty", "1"); }
+            else { field.setAttribute("data-mine", minesNum.toString()); field.setAttribute("data-empty", "0"); }
         }
     });
 }
 
 //#endregion
 
-//#region - funkcija koja proverava polja u okruzenju
-function countMines(field: HTMLTableCellElement): number { // prosledjujemo polje na osnovu kojeg vrsimo proveru i broj kolona zbog orijentacije
+//#region - countMines() - counts mines in surrounding
+function countMines(field: HTMLTableCellElement): number {
     const gameModeInfo = Game.getInstance().modeInfo(Player.getInstance().getGameMode());
     const numOfCols: number = gameModeInfo[1];
-    let counter = 0; // brojac mina u okruzenju polja
-    let surrounding = defineSurrounding(Game.getInstance().getGameTable(), field); // kreiramo okruzenje (pozivamo funkciju za to)
-    surrounding.forEach(surField => { // proveravamo svako polje u okruzenju
-        if (surField === null) { }// ako je polje van tabele, ignorisi
-        else if (surField.getAttribute("data-mine") === "\uD83D\uDCA3") { // za svaku minu
-            counter++; //dodaj jedan u brojac
+    let counter = 0;
+    let surrounding = defineSurrounding(Game.getInstance().getGameTable(), field);
+    surrounding.forEach(surField => {
+        if (surField === null) { }
+        else if (surField.getAttribute("data-mine") === "\uD83D\uDCA3") {
+            counter++;
         }
     });
-    return counter; // cela funkcija vraca brojac tj. ukupa broj mina u okruzenju
+    return counter;
 }
 //#endregion
 
-export { setMines, clearMines, showMines, writeTips };
+export { setMines, clearMines, showMines, writeTips, setMineIcon };
