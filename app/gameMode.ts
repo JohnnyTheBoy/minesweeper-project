@@ -4,7 +4,7 @@ import { Game, Player } from './data';
 // const customRowsInput = <HTMLInputElement>document.getElementById('customRows');
 // const customColsInput = <HTMLInputElement>document.getElementById('customCols');
 // const customMinesInput = <HTMLInputElement>document.getElementById('customMines');
-const gameModeInput = <HTMLSelectElement>document.getElementById('gameMode');
+const gameModeInput = <HTMLSelectElement>document.getElementById('game-mode');
 // const customModeOptions = <HTMLElement>document.getElementById('customModeOptions');
 //#endregion
 

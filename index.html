@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/app.css">
-    <title>Minesweeper JS Game</title>
+    <title>Document</title>
 </head>
 
 <body id="body">
 
     <header>
 
-        <h1 id="logo">Minesweeper</h1>
+        <h1>Minesweeper</h1>
 
-        <div id="bomb">
-            <img src="./images/bomb.png" id="bombPic" alt="moving-bomb">
-            <div class="shadow"></div>
+        <div>
+            <img src="./images/bomb.png" id="swinging-bomb" alt="swinging-bomb">
+            <div id="shadow"></div>
         </div>
 
         <nav>
             <ul>
                 <li id="about-game-button">About Game</li>
-                <li id="game-rules-button">Game rules</li>
-                <li id="table-button">Table</li>
+                <li id="game-rules-button">Game Rules</li>
+                <li id="game-button">Game</li>
             </ul>
         </nav>
 
@@ -32,16 +32,16 @@
 
     <main>
 
-        <section id="game-options">
+        <section id="options">
 
             <p>
-                <label for="username">Player name:</label>
-                <input type="text" name="username" id="username" placeholder=" enter name here..." maxlength="15" class="input ">
+                <label for="player-name">Player name:</label>
+                <input type="text" name="player-name" id="player-name" placeholder=" enter name here..." maxlength="15" class="input ">
             </p>
 
             <p>
-                <label for="gameMode">Choose game mode:</label>
-                <select name="gameMode" id="gameMode" class="select">
+                <label for="game-mode">Choose game mode:</label>
+                <select name="game-mode" id="game-mode" class="select">
                     <option value="beginner">Beginner</option>
                     <option value="intermediate">Intermediate</option>
                     <option value="expert">Expert</option>
@@ -53,10 +53,10 @@
                 <button id="reset" class="btn" disabled="disabled">New Game</button>
             </p>
 
-            <p id="timer">
+            <div id="timer">
                 <p id="time-string">Time:</p>
-                <p id="timerPlace">00 : 00 : 00</p>
-            </p>
+                <p id="timer-place">00 : 00 : 00</p>
+            </div>
 
         </section>
 
@@ -64,7 +64,7 @@
 
             <section id="welcome-screen">
 
-                <h1>Welcome to Minesweeper</h1>
+                <h2>Welcome to Minesweeper</h2>
 
                 <p>
                     Minesweeper is a logic game for single player. Main part of the game is board with defined number of fields that contains
@@ -79,7 +79,7 @@
 
             <section id="about-game" class='remove'>
 
-                <h1>About Minesweeper</h1>
+                <h2>About Minesweeper</h2>
 
                 <p>
                     Minesweeper is a logic game for single player. Main part of the game is board with defined number of fields that contains
@@ -88,7 +88,7 @@
                     mines in each field.
                 </p>
 
-                <h2>Game History</h2>
+                <h3>Game History</h3>
 
                 <p>
                     The game originates from the 1960s. However, the game we know today was created by Robert Donner and Curt Johnson both Microsoft
@@ -100,7 +100,7 @@
 
             <section id="game-rules" class="remove">
 
-                <h1>Game Rules</h1>
+                <h2>Game Rules</h2>
 
                 <ul>
                     <li> Game starts when player clicks on first field, and that also starts the timer.</li>
@@ -113,33 +113,41 @@
 
             </section>
 
-            <section id="game"></section>
+            <section id="game" class="remove"></section>
 
         </section>
 
         <section id="score-table">
 
-            <h1>Score Table</h1>
+            <h2>Score Table</h2>
 
-            <h2 id="modeName">- game mode -</h2>
+            <h3 id="game-mode-name">- game mode -</h3>
 
-            <ol id="scoreList">
+            <ol id="score-list">
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
             </ol>
+
         </section>
 
     </main>
 
+
     <footer>
         <p> Copyright &copy;2018. All rights reserverd.</p>
+        <div>
+           <a target=".blank"  href="http://www.facebook.com/"><img src="./images/facebook.png" alt="facebook"></a> 
+           <a target=".blank"  href="http://www.twitter.com/"><img src="./images/twitter.png" alt="twitter"></a> 
+           <a target=".blank"  href="http://www.pinterest.com/"><img src="./images/pinterest.png" alt="pinterest"></a> 
+           <a target=".blank"  href="http://www.plus.google.com/"><img src="./images/google.png" alt="google-plus"></a> 
+           <a target=".blank"  href="http://www.stumbleupon.com/"><img src="./images/stumbleupon.png" alt="stumble-upon"></a> 
+        </div>
     </footer>
 
     <script src="./js/bundle.js"></script>
-
 </body>
 
 </html>

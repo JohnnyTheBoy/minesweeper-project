@@ -1,4 +1,4 @@
-import { Game, Player, gameOptionsSection, gameStartButton, gameResetButton, gameSection, game, playerNameInput, welcomeScreen } from './data';
+import { Game, Player, gameOptionsSection, gameStartButton, gameResetButton, gameSection, game, playerNameInput} from './data';
 import { gameMode, gameModeInput } from './gameMode';
 import { createGrid } from './tableGrid';
 import { setMines, clearMines, showMines, writeTips } from './minesAndTips';

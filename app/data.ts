@@ -1,8 +1,8 @@
 //#region - selectors
 const gameStartButton = <HTMLButtonElement>document.getElementById('start');
 const gameResetButton = <HTMLButtonElement>document.getElementById('reset');
-const playerNameInput = <HTMLInputElement>document.getElementById('username');
-const gameOptionsSection = document.getElementById('game-options');
+const playerNameInput = <HTMLInputElement>document.getElementById('player-name');
+const gameOptionsSection = document.getElementById('options');
 const gameSection = document.getElementById('game-place');
 const welcomeScreen = document.getElementById('welcome-screen');
 const game = document.getElementById('game');
@@ -73,7 +73,7 @@ class Player {
         return this._name;
     }
     setName(value: string) {
-        if (value === ''){value = 'unknown player'}
+        if (value === '') { value = 'unknown player' }
         this._name = value;
         console.log(`Players name set to: ${this._name}`)
     }
@@ -97,4 +97,4 @@ class Player {
 }
 //#endregion
 
-export { Game, Player, gameStartButton, gameResetButton, playerNameInput, gameOptionsSection, gameSection,welcomeScreen,game };
+export { Game, Player, gameStartButton, gameResetButton, playerNameInput, gameOptionsSection, gameSection, welcomeScreen, game };
