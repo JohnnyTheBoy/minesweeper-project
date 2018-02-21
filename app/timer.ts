@@ -37,7 +37,7 @@ let resetTimer = () => {
 }
 
 let stringInterval = 0; // za ispis string vremena
-const timerPlace = document.getElementById('timerPlace');
+const timerPlace = document.getElementById('timer-place');
 
 let startTimerHandler = () => {
     startTimer();

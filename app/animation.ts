@@ -1,8 +1,9 @@
 import { Game, gameSection, game, welcomeScreen } from './data';
 
 const aboutGameButton = document.getElementById('about-game-button');
-const tableButton = document.getElementById('table-button');
+const gameButton = document.getElementById('game-button');
 const gameRulesButton = document.getElementById('game-rules-button');
+
 const gameRules = document.getElementById('game-rules');
 const aboutGame = document.getElementById('about-game');
 const body = document.getElementById("body");
@@ -53,7 +54,7 @@ const gameShow = () => {
 
 aboutGameButton.addEventListener('click', aboutGameShow);
 gameRulesButton.addEventListener('click', gameRulesShow);
-tableButton.addEventListener('click', gameShow);
+gameButton.addEventListener('click', gameShow);
 
 //#endregion
 

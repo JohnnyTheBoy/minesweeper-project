@@ -2,9 +2,8 @@ import { Player } from './data';
 import { calcScore } from './timer';
 
 //#region - selectors
-const scoreList = document.getElementById('scoreList');
-const gameModeName = document.getElementById('modeName');
-const modeNameHeading = document.getElementById('modeNameHeading');
+const scoreList = document.getElementById('score-list');
+const gameModeName = document.getElementById('game-mode-name');
 //#endregion
 
 //#region - rankingTable definition
