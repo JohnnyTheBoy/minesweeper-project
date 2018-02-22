@@ -15,7 +15,7 @@
 
 html {
     /* overflow: hidden; */
-    /* overflow-y: hidden; */
+    overflow-y: scroll;
     font-size: 16px;
     height:100%;
 }
@@ -350,7 +350,7 @@ td:hover {
 }
 
 #about-game h3 {
-    padding-bottom: 1rem;
+    padding: 1rem 0;
     color: rgb(130, 137, 151);
 }
 
@@ -425,7 +425,7 @@ footer p {
 
 .big-boom {
     position: absolute;
-    top: -10rem;
+    top: -12rem;
     left: 10rem;
     width: 80%;
     z-index: 10;
